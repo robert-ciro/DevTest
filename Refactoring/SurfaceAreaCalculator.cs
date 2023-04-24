@@ -6,7 +6,7 @@ namespace Refactoring
 
     public class SurfaceAreaCalculator
     {
-        List<IGeometricShape> geometricShapes { get; set; }
+        private List<IGeometricShape> geometricShapes;
         public double[] arrSurfaceAreas { get; set; }
         private readonly ILogger logger;
 
