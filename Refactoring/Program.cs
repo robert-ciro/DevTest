@@ -7,30 +7,26 @@ namespace Refactoring
         static void Main(string[] args)
         {
             var logger = new Logger();
-            Greet();
+            Greet(logger);
             SurfaceAreaCalculator surfaceAreaCalculator = new SurfaceAreaCalculator(logger);
             surfaceAreaCalculator.ShowCommands();
             surfaceAreaCalculator.ReadString(Console.ReadLine());
             Console.ReadKey();
         }
 
-        private static void Greet()
+        private static void Greet(ILogger logger)
         {
-            Console.WriteLine(" -------------------------------------------------------------------------- ");
-            Console.WriteLine("| Greetings and salutations fellow developer :D                            |");
-            Console.WriteLine("|                                                                          |");
-            Console.WriteLine("| If you are reading this we probably want to know if you know your stuff. |");
-            Console.WriteLine("|                                                                          |");
-            Console.WriteLine("| How would you improve this code?                                         |");
-            Console.WriteLine("| We challenge you to refactor this and show us how awesome you are ;)     |");
-            Console.WriteLine("| We also really like trapezoids so could you also implement that for us?  |");
-            Console.WriteLine("|                                                                          |");
-            Console.WriteLine("|                                                               Good luck! |");
-            Console.WriteLine(" --------------------------------------------------------------------------");
-            SurfaceAreaCalculator surfaceAreaCalculator = new SurfaceAreaCalculator();
-            surfaceAreaCalculator.ShowCommands();
-            surfaceAreaCalculator.ReadString(Console.ReadLine());
-            Console.ReadKey();
+            logger.Log(" -------------------------------------------------------------------------- ");
+            logger.Log("| Greetings and salutations fellow developer :D                            |");
+            logger.Log("|                                                                          |");
+            logger.Log("| If you are reading this we probably want to know if you know your stuff. |");
+            logger.Log("|                                                                          |");
+            logger.Log("| How would you improve this code?                                         |");
+            logger.Log("| We challenge you to refactor this and show us how awesome you are ;)     |");
+            logger.Log("| We also really like trapezoids so could you also implement that for us?  |");
+            logger.Log("|                                                                          |");
+            logger.Log("|                                                               Good luck! |");
+            logger.Log(" --------------------------------------------------------------------------");
         }
     }
 
