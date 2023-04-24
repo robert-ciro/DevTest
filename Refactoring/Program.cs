@@ -29,7 +29,7 @@ namespace Refactoring
             logger.Log(" --------------------------------------------------------------------------");
         }
     }
-    public class Circle
+    public class Circle : IGeometricShape
     {
         public double Radius { get; set; }
 
@@ -38,7 +38,7 @@ namespace Refactoring
             return Math.Round(Math.PI * (Radius * Radius), 2);
         }
     }
-    public class Rectangle
+    public class Rectangle : IGeometricShape
     {
         public double Height { get; set; }
 
@@ -49,7 +49,7 @@ namespace Refactoring
             return Height * Width;
         }
     }
-    public class Square
+    public class Square : IGeometricShape
     {
         public double Side { get; set; }
 
@@ -58,7 +58,7 @@ namespace Refactoring
             return this.Side * this.Side;
         }
     }
-    public class Triangle
+    public class Triangle : IGeometricShape
     {
         double height;
         public double Height
