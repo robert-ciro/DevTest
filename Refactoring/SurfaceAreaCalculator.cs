@@ -1,16 +1,19 @@
 namespace Refactoring
 {
     using System;
+    using System.Collections.Generic;
+    using System.Linq;
 
     public class SurfaceAreaCalculator
     {
-        IGeometricShape[] geometricShapes { get; set; }
+        List<IGeometricShape> geometricShapes { get; set; }
         public double[] arrSurfaceAreas { get; set; }
         private readonly ILogger logger;
 
         public SurfaceAreaCalculator(ILogger logger)
         {
             this.logger = logger;
+            this.geometricShapes = new List<IGeometricShape>();
         }
 
         public void ShowCommands()
@@ -28,35 +31,7 @@ namespace Refactoring
 
         public void Add(IGeometricShape geometryShape)
         {
-            IGeometricShape[] arrObjects2;
-            if (this.geometricShapes == null)
-            {
-                this.geometricShapes = new IGeometricShape[1];
-                if (this.geometricShapes != null)
-                {
-                    this.geometricShapes[0] = geometryShape;
-                }
-            }
-            else
-            {
-                if (this.geometricShapes != null)
-                {
-                    arrObjects2 = new IGeometricShape[this.geometricShapes.Length + 1];
-                    int i;
-                    for (i = 0; i < arrObjects2.Length; i++)
-                    {
-                        if (i == arrObjects2.Length - 1)
-                        {
-                            arrObjects2[i] = geometryShape;
-                        }
-                        else
-                        {
-                            arrObjects2[i] = this.geometricShapes[i];
-                        }
-                    }
-                    this.geometricShapes = arrObjects2;
-                }
-            }
+            this.geometricShapes.Add(geometryShape);
         }
 
         public void ReadString(string pCommand)
@@ -129,7 +104,7 @@ namespace Refactoring
                     break;
                 case "reset":
                     this.arrSurfaceAreas = null;
-                    this.geometricShapes = null;
+                    this.geometricShapes = Enumerable.Empty<IGeometricShape>().ToList();
                     Console.WriteLine("Reset state!!");
                     this.ReadString(Console.ReadLine());
                     break;
@@ -158,8 +133,8 @@ namespace Refactoring
             {
                 if (this.geometricShapes != null)
                 {
-                    this.arrSurfaceAreas = new double[this.geometricShapes.Length];
-                    for (int i = 0; i < this.geometricShapes.Length; i++)
+                    this.arrSurfaceAreas = new double[this.geometricShapes.Count];
+                    for (int i = 0; i < this.geometricShapes.Count; i++)
                     {
                         if (this.geometricShapes[i].GetType().Name == "Circle")
                         {
@@ -201,7 +176,7 @@ namespace Refactoring
             catch (Exception ex)
             {
                 this.logger.Log(ex.ToString());
-                this.geometricShapes = new IGeometricShape[0];
+                this.geometricShapes = Enumerable.Empty<IGeometricShape>().ToList();
             }
         }
     }
