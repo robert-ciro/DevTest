@@ -6,6 +6,15 @@ namespace Refactoring
     {
         static void Main(string[] args)
         {
+            Greet();
+            SurfaceAreaCalculator surfaceAreaCalculator = new SurfaceAreaCalculator();
+            surfaceAreaCalculator.ShowCommands();
+            surfaceAreaCalculator.ReadString(Console.ReadLine());
+            Console.ReadKey();
+        }
+
+        private static void Greet()
+        {
             Console.WriteLine(" -------------------------------------------------------------------------- ");
             Console.WriteLine("| Greetings and salutations fellow developer :D                            |");
             Console.WriteLine("|                                                                          |");
