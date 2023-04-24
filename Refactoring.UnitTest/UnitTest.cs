@@ -100,7 +100,7 @@
             double[] expectedSurfaceAreas = new double[] { TriangleSurfaceArea, CircleSurfaceArea, SquareSurfaceArea, RectangleSurfaceArea };
 
             // Act
-            SurfaceAreaCalculator surfaceAreaCalculator = new SurfaceAreaCalculator();
+            SurfaceAreaCalculator surfaceAreaCalculator = new SurfaceAreaCalculator(new YummyLogger());
             surfaceAreaCalculator.Add(triangle);
             surfaceAreaCalculator.Add(circle);
             surfaceAreaCalculator.Add(square);
@@ -114,6 +114,13 @@
             Assert.AreEqual(expectedSurfaceAreas[1], surfaceAreas[1]);
             Assert.AreEqual(expectedSurfaceAreas[2], surfaceAreas[2]);
             Assert.AreEqual(expectedSurfaceAreas[3], surfaceAreas[3]);
+        }
+    }
+    
+    internal class YummyLogger : ILogger
+    {
+        public void Log(string pLog)
+        {
         }
     }
 }

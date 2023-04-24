@@ -6,8 +6,9 @@ namespace Refactoring
     {
         static void Main(string[] args)
         {
+            var logger = new Logger();
             Greet();
-            SurfaceAreaCalculator surfaceAreaCalculator = new SurfaceAreaCalculator();
+            SurfaceAreaCalculator surfaceAreaCalculator = new SurfaceAreaCalculator(logger);
             surfaceAreaCalculator.ShowCommands();
             surfaceAreaCalculator.ReadString(Console.ReadLine());
             Console.ReadKey();
@@ -37,24 +38,24 @@ namespace Refactoring
     {
         object[] arrObjects { get; set; }
         public double[] arrSurfaceAreas { get; set; }
-        internal Logger Logger { get; private set; }
+        private readonly ILogger logger;
 
-        public SurfaceAreaCalculator()
+        public SurfaceAreaCalculator(ILogger logger)
         {
-            this.Logger = new Logger();
+            this.logger = logger;
         }
 
         public void ShowCommands()
         {
-            this.Logger.Log("commands:");
-            this.Logger.Log("- create square {double} (create a new square)");
-            this.Logger.Log("- create circle {double} (create a new circle)");
-            this.Logger.Log("- create rectangle {height} {width} (create a new rectangle)");
-            this.Logger.Log("- create triangle {height} {width} (create a new triangle)");
-            this.Logger.Log("- print (print the calculated surface areas)");
-            this.Logger.Log("- calculate (calulate the surface areas of the created shapes)");
-            this.Logger.Log("- reset (reset)");
-            this.Logger.Log("- exit (exit the loop)");
+            this.logger.Log("commands:");
+            this.logger.Log("- create square {double} (create a new square)");
+            this.logger.Log("- create circle {double} (create a new circle)");
+            this.logger.Log("- create rectangle {height} {width} (create a new rectangle)");
+            this.logger.Log("- create triangle {height} {width} (create a new triangle)");
+            this.logger.Log("- print (print the calculated surface areas)");
+            this.logger.Log("- calculate (calulate the surface areas of the created shapes)");
+            this.logger.Log("- reset (reset)");
+            this.logger.Log("- exit (exit the loop)");
         }
 
         public void Add(object pObject)
@@ -168,16 +169,16 @@ namespace Refactoring
                     break;
                 default:
                     ShowCommands:
-                    this.Logger.Log("Unknown command!!!");
-                    this.Logger.Log("commands:");
-                    this.Logger.Log("- create square {double} (create a new square)");
-                    this.Logger.Log("- create circle {double} (create a new circle)");
-                    this.Logger.Log("- create rectangle {height} {width} (create a new rectangle)");
-                    this.Logger.Log("- create triangle {height} {width} (create a new triangle)");
-                    this.Logger.Log("- print (print the calculated surface areas)");
-                    this.Logger.Log("- calculate (calulate the surface areas of the created shapes)");
-                    this.Logger.Log("- reset (reset)");
-                    this.Logger.Log("- exit (exit the loop)");
+                    this.logger.Log("Unknown command!!!");
+                    this.logger.Log("commands:");
+                    this.logger.Log("- create square {double} (create a new square)");
+                    this.logger.Log("- create circle {double} (create a new circle)");
+                    this.logger.Log("- create rectangle {height} {width} (create a new rectangle)");
+                    this.logger.Log("- create triangle {height} {width} (create a new triangle)");
+                    this.logger.Log("- print (print the calculated surface areas)");
+                    this.logger.Log("- calculate (calulate the surface areas of the created shapes)");
+                    this.logger.Log("- reset (reset)");
+                    this.logger.Log("- exit (exit the loop)");
                     this.ReadString(Console.ReadLine());
                     break;
             }
@@ -231,7 +232,7 @@ namespace Refactoring
             }
             catch (Exception ex)
             {
-                this.Logger.Log(ex.ToString());
+                this.logger.Log(ex.ToString());
                 this.arrObjects = new object[0];
             }
         }
