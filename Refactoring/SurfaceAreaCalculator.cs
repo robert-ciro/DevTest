@@ -4,7 +4,7 @@ namespace Refactoring
 
     public class SurfaceAreaCalculator
     {
-        object[] arrObjects { get; set; }
+        IGeometricShape[] geometricShapes { get; set; }
         public double[] arrSurfaceAreas { get; set; }
         private readonly ILogger logger;
 
@@ -26,35 +26,35 @@ namespace Refactoring
             this.logger.Log("- exit (exit the loop)");
         }
 
-        public void Add(object pObject)
+        public void Add(IGeometricShape geometryShape)
         {
-            object[] arrObjects2;
-            if (this.arrObjects == null)
+            IGeometricShape[] arrObjects2;
+            if (this.geometricShapes == null)
             {
-                this.arrObjects = new object[1];
-                if (this.arrObjects != null)
+                this.geometricShapes = new IGeometricShape[1];
+                if (this.geometricShapes != null)
                 {
-                    this.arrObjects[0] = pObject;
+                    this.geometricShapes[0] = geometryShape;
                 }
             }
             else
             {
-                if (this.arrObjects != null)
+                if (this.geometricShapes != null)
                 {
-                    arrObjects2 = new object[this.arrObjects.Length + 1];
+                    arrObjects2 = new IGeometricShape[this.geometricShapes.Length + 1];
                     int i;
                     for (i = 0; i < arrObjects2.Length; i++)
                     {
                         if (i == arrObjects2.Length - 1)
                         {
-                            arrObjects2[i] = pObject;
+                            arrObjects2[i] = geometryShape;
                         }
                         else
                         {
-                            arrObjects2[i] = this.arrObjects[i];
+                            arrObjects2[i] = this.geometricShapes[i];
                         }
                     }
-                    this.arrObjects = arrObjects2;
+                    this.geometricShapes = arrObjects2;
                 }
             }
         }
@@ -118,7 +118,7 @@ namespace Refactoring
                     {
                         for (int i = 0; i < arrSurfaceAreas.Length; i++)
                         {
-                            Console.WriteLine("[{0}] {1} surface area is {2}", i, arrObjects[i].GetType().Name, arrSurfaceAreas[i]);
+                            Console.WriteLine("[{0}] {1} surface area is {2}", i, geometricShapes[i].GetType().Name, arrSurfaceAreas[i]);
                         }
                     }
                     else
@@ -129,7 +129,7 @@ namespace Refactoring
                     break;
                 case "reset":
                     this.arrSurfaceAreas = null;
-                    this.arrObjects = null;
+                    this.geometricShapes = null;
                     Console.WriteLine("Reset state!!");
                     this.ReadString(Console.ReadLine());
                     break;
@@ -156,32 +156,32 @@ namespace Refactoring
         {
             try
             {
-                if (this.arrObjects != null)
+                if (this.geometricShapes != null)
                 {
-                    this.arrSurfaceAreas = new double[this.arrObjects.Length];
-                    for (int i = 0; i < this.arrObjects.Length; i++)
+                    this.arrSurfaceAreas = new double[this.geometricShapes.Length];
+                    for (int i = 0; i < this.geometricShapes.Length; i++)
                     {
-                        if (this.arrObjects[i].GetType().Name == "Circle")
+                        if (this.geometricShapes[i].GetType().Name == "Circle")
                         {
-                            this.arrSurfaceAreas[i] = ((Circle)this.arrObjects[i]).CalculateSurfaceArea();
+                            this.arrSurfaceAreas[i] = ((Circle)this.geometricShapes[i]).CalculateSurfaceArea();
                         }
                         else
                         {
-                            if (this.arrObjects[i].GetType().Name == "Rectangle")
+                            if (this.geometricShapes[i].GetType().Name == "Rectangle")
                             {
-                                this.arrSurfaceAreas[i] = ((Rectangle)this.arrObjects[i]).CalculateSurfaceArea();
+                                this.arrSurfaceAreas[i] = ((Rectangle)this.geometricShapes[i]).CalculateSurfaceArea();
                             }
                             else
                             {
-                                if (this.arrObjects[i].GetType().Name == "Square")
+                                if (this.geometricShapes[i].GetType().Name == "Square")
                                 {
-                                    this.arrSurfaceAreas[i] = ((Square)this.arrObjects[i]).CalculateSurfaceArea();
+                                    this.arrSurfaceAreas[i] = ((Square)this.geometricShapes[i]).CalculateSurfaceArea();
                                 }
                                 else
                                 {
-                                    if (this.arrObjects[i].GetType().Name == "Triangle")
+                                    if (this.geometricShapes[i].GetType().Name == "Triangle")
                                     {
-                                        this.arrSurfaceAreas[i] = ((Triangle)this.arrObjects[i]).CalculateSurfaceArea();
+                                        this.arrSurfaceAreas[i] = ((Triangle)this.geometricShapes[i]).CalculateSurfaceArea();
                                     }
                                     else
                                     {
@@ -192,7 +192,7 @@ namespace Refactoring
                         }
                     }
                 }
-                else if (this.arrObjects == null)
+                else if (this.geometricShapes == null)
                 {
                     throw new Exception("arrItems is null!!");
                 }
@@ -201,7 +201,7 @@ namespace Refactoring
             catch (Exception ex)
             {
                 this.logger.Log(ex.ToString());
-                this.arrObjects = new object[0];
+                this.geometricShapes = new IGeometricShape[0];
             }
         }
     }
