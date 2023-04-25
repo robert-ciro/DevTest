@@ -47,6 +47,7 @@
     <Compile Include="Entities\IGeometricShape.cs" />
     <Compile Include="Entities\Rectangle.cs" />
     <Compile Include="Entities\Square.cs" />
+    <Compile Include="Entities\Trapezoid.cs" />
     <Compile Include="Entities\Triangle.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Program.cs" />

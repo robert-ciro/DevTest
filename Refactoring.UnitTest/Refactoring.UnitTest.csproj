@@ -50,6 +50,7 @@
     <Compile Include="Entity\CircleTest.cs" />
     <Compile Include="Entity\RectangleTest.cs" />
     <Compile Include="Entity\SquareTest.cs" />
+    <Compile Include="Entity\TrapezoidTest.cs" />
     <Compile Include="Entity\TriangleTest.cs" />
     <Compile Include="SurfaceAreaCalculatorTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

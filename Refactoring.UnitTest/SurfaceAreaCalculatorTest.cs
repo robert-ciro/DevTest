@@ -18,6 +18,10 @@
         private const double RectangleHeight = 23d;
         private const double RectangleWidth = 67d;
         private const double RectangleSurfaceArea = 1541d;
+        private const double TrapezoidTop = 44d;
+        private const double TrapezoidBottom = 23d;
+        private const double TrapezoidHigh = 23d;
+        private const double TrapezoidSurfaceArea = 770.5d;
         
         [TestMethod]
         public void ShouldReturnValidSurfaceAreas()
@@ -29,15 +33,15 @@
             var square = new Square(SquareSide);
             var dimension = new Dimension(RectangleHeight, RectangleWidth);
             var rectangle = new Rectangle(dimension);
+            var trapezoid = new Trapezoid(TrapezoidTop, TrapezoidBottom, TrapezoidHigh);
 
-            // TODO: Implement a new Trapezoid shape
             // Act
             var surfaceAreaCalculator = new SurfaceAreaCalculator(new YummyLogger());
             surfaceAreaCalculator.Add(triangle);
             surfaceAreaCalculator.Add(circle);
             surfaceAreaCalculator.Add(square);
             surfaceAreaCalculator.Add(rectangle);
-            // TODO: surfaceAreaCalculator.Add(trapezoid);
+            surfaceAreaCalculator.Add(trapezoid);
             surfaceAreaCalculator.CalculateSurfaceAreas();
             var surfaceAreas = surfaceAreaCalculator.SurfaceAreas;
             // Assert
@@ -45,6 +49,7 @@
             Assert.AreEqual(expected: CircleSurfaceArea, surfaceAreas[1]);
             Assert.AreEqual(expected: SquareSurfaceArea, surfaceAreas[2]);
             Assert.AreEqual(expected: RectangleSurfaceArea, surfaceAreas[3]);
+            Assert.AreEqual(expected: TrapezoidSurfaceArea, surfaceAreas[4]);
         }
     }
     
