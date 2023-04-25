@@ -18,22 +18,7 @@
         private const double RectangleHeight = 23d;
         private const double RectangleWidth = 67d;
         private const double RectangleSurfaceArea = 1541d;
-
-        [TestMethod]
-        public void SquareCalculateSurfaceArea()
-        {
-            // Arrange
-            Square square = new Square();
-            square.Side = SquareSide;
-
-            // Act
-            double surfaceArea = square.CalculateSurfaceArea();
-
-            // Assert
-            Assert.AreEqual(SquareSurfaceArea, surfaceArea);
-        }
-
-
+        
         [TestMethod]
         public void CalculateSurfaceAreas()
         {
@@ -43,8 +28,7 @@
 
             Circle circle = new Circle(CircleRadius);
 
-            Square square = new Square();
-            square.Side = SquareSide;
+            Square square = new Square(SquareSide);
 
             var dimension = new Dimension(RectangleHeight, RectangleWidth);
             Rectangle rectangle = new Rectangle(dimension);

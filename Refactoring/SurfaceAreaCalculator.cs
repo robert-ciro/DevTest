@@ -49,8 +49,7 @@ namespace Refactoring
                         switch (arrCommands[1].ToLower())
                         {
                             case "square":
-                                Square square = new Square();
-                                square.Side = double.Parse(arrCommands[2]);
+                                Square square = new Square(double.Parse(arrCommands[2]));
                                 this.Add(square);
                                 this.CalculateSurfaceAreas();
                                 Console.WriteLine($"{nameof(Square)} created!");

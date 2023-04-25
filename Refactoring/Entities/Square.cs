@@ -1,8 +1,20 @@
 namespace Refactoring.Entities
 {
+    using System;
+
     public class Square : IGeometricShape
     {
-        public double Side { get; set; }
+        public double Side { get; }
+
+        public Square(double side)
+        {
+            if(side <= 0)
+            {
+                throw new ArgumentException("Side must be greater than 0.");
+            }
+            
+            this.Side = side;
+        }
 
         public double CalculateSurfaceArea()
         {
