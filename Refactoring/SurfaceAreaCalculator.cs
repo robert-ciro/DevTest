@@ -7,13 +7,14 @@ namespace Refactoring
     public class SurfaceAreaCalculator
     {
         private List<IGeometricShape> geometricShapes;
-        public double[] arrSurfaceAreas { get; set; }
+        public List<double> surfaceAreas { get; set; }
         private readonly ILogger logger;
 
         public SurfaceAreaCalculator(ILogger logger)
         {
-            this.logger = logger;
             this.geometricShapes = new List<IGeometricShape>();
+            this.surfaceAreas = new List<double>();
+            this.logger = logger;
         }
 
         public void ShowCommands()
@@ -89,11 +90,11 @@ namespace Refactoring
                     this.ReadString(Console.ReadLine());
                     break;
                 case "print":
-                    if (arrSurfaceAreas != null)
+                    if (surfaceAreas != null)
                     {
-                        for (int i = 0; i < arrSurfaceAreas.Length; i++)
+                        for (int i = 0; i < surfaceAreas.Count; i++)
                         {
-                            Console.WriteLine("[{0}] {1} surface area is {2}", i, geometricShapes[i].GetType().Name, arrSurfaceAreas[i]);
+                            Console.WriteLine("[{0}] {1} surface area is {2}", i, geometricShapes[i].GetType().Name, surfaceAreas[i]);
                         }
                     }
                     else
@@ -103,8 +104,8 @@ namespace Refactoring
                     this.ReadString(Console.ReadLine());
                     break;
                 case "reset":
-                    this.arrSurfaceAreas = null;
-                    this.geometricShapes = Enumerable.Empty<IGeometricShape>().ToList();
+                    this.surfaceAreas = new List<double>();
+                    this.geometricShapes = new List<IGeometricShape>();
                     Console.WriteLine("Reset state!!");
                     this.ReadString(Console.ReadLine());
                     break;
@@ -123,52 +124,16 @@ namespace Refactoring
         {
             try
             {
-                if (this.geometricShapes != null)
+                this.surfaceAreas = new List<double>();
+                foreach (var geometricShape in this.geometricShapes)
                 {
-                    this.arrSurfaceAreas = new double[this.geometricShapes.Count];
-                    for (int i = 0; i < this.geometricShapes.Count; i++)
-                    {
-                        if (this.geometricShapes[i].GetType().Name == "Circle")
-                        {
-                            this.arrSurfaceAreas[i] = ((Circle)this.geometricShapes[i]).CalculateSurfaceArea();
-                        }
-                        else
-                        {
-                            if (this.geometricShapes[i].GetType().Name == "Rectangle")
-                            {
-                                this.arrSurfaceAreas[i] = ((Rectangle)this.geometricShapes[i]).CalculateSurfaceArea();
-                            }
-                            else
-                            {
-                                if (this.geometricShapes[i].GetType().Name == "Square")
-                                {
-                                    this.arrSurfaceAreas[i] = ((Square)this.geometricShapes[i]).CalculateSurfaceArea();
-                                }
-                                else
-                                {
-                                    if (this.geometricShapes[i].GetType().Name == "Triangle")
-                                    {
-                                        this.arrSurfaceAreas[i] = ((Triangle)this.geometricShapes[i]).CalculateSurfaceArea();
-                                    }
-                                    else
-                                    {
-                                        throw new Exception("Cannot calculate surface area of unkown object!!!");
-                                    }
-                                }
-                            }
-                        }
-                    }
+                    this.surfaceAreas.Add(geometricShape.CalculateSurfaceArea());
                 }
-                else if (this.geometricShapes == null)
-                {
-                    throw new Exception("arrItems is null!!");
-                }
-
             }
             catch (Exception ex)
             {
                 this.logger.Log(ex.ToString());
-                this.geometricShapes = Enumerable.Empty<IGeometricShape>().ToList();
+                this.geometricShapes = new List<IGeometricShape>();
             }
         }
     }
