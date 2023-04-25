@@ -55,8 +55,7 @@ namespace Refactoring
                                 Console.WriteLine($"{nameof(Square)} created!");
                                 break;
                             case "circle":
-                                Circle circle = new Circle();
-                                circle.Radius = double.Parse(arrCommands[2]);
+                                Circle circle = new Circle(double.Parse(arrCommands[2]));
                                 this.Add(circle);
                                 this.CalculateSurfaceAreas();
                                 Console.WriteLine($"{nameof(Circle)} created!");

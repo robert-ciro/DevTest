@@ -4,8 +4,18 @@ namespace Refactoring.Entities
 
     public class Circle : IGeometricShape
     {
-        public double Radius { get; set; }
+        public double Radius { get; }
 
+        public Circle(double radius)
+        {
+            if(radius <= 0)
+            {
+                throw new ArgumentException("Radius must be greater than 0.");
+            }
+            
+            this.Radius = radius;
+        }
+        
         public double CalculateSurfaceArea()
         {
             return Math.Round(Math.PI * (Radius * Radius), 2);

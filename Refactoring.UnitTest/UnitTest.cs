@@ -34,20 +34,6 @@
         }
 
         [TestMethod]
-        public void CircleCalculateSurfaceArea()
-        {
-            // Arrange
-            Circle circle = new Circle();
-            circle.Radius = CircleRadius;
-
-            // Act
-            double surfaceArea = circle.CalculateSurfaceArea();
-
-            // Assert
-            Assert.AreEqual(CircleSurfaceArea, surfaceArea);
-        }
-
-        [TestMethod]
         public void SquareCalculateSurfaceArea()
         {
             // Arrange
@@ -84,8 +70,7 @@
             triangle.Height = TriangleHeight;
             triangle.Width = TriangleWidth;
 
-            Circle circle = new Circle();
-            circle.Radius = CircleRadius;
+            Circle circle = new Circle(CircleRadius);
 
             Square square = new Square();
             square.Side = SquareSide;
