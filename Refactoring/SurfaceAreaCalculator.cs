@@ -3,6 +3,7 @@ namespace Refactoring
     using System;
     using System.Collections.Generic;
     using Refactoring.Entities;
+    using Refactoring.ValueTypes;
 
     public class SurfaceAreaCalculator
     {
@@ -69,9 +70,8 @@ namespace Refactoring
                                 Console.WriteLine($"{nameof(Triangle)} created!");
                                 break;
                             case "rectangle":
-                                Rectangle rectangle = new Rectangle();
-                                rectangle.Height = double.Parse(arrCommands[2]);
-                                rectangle.Width = double.Parse(arrCommands[3]);
+                                var dimension = new Dimension(height: double.Parse(arrCommands[2]), width: double.Parse(arrCommands[3]));
+                                Rectangle rectangle = new Rectangle(dimension);
                                 this.Add(rectangle);
                                 this.CalculateSurfaceAreas();
                                 Console.WriteLine($"{nameof(Rectangle)} created!");

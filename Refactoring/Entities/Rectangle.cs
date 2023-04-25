@@ -1,14 +1,19 @@
 namespace Refactoring.Entities
 {
+    using Refactoring.ValueTypes;
+
     public class Rectangle : IGeometricShape
     {
-        public double Height { get; set; }
-
-        public double Width { get; set; }
+        public Dimension Dimension { get; } 
+        
+        public Rectangle(Dimension dimension)
+        {
+            Dimension = dimension;
+        }
 
         public double CalculateSurfaceArea()
         {
-            return Height * Width;
+            return Dimension.Height * Dimension.Width;
         }
     }
 }

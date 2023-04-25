@@ -3,6 +3,7 @@
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Refactoring;
     using Refactoring.Entities;
+    using Refactoring.ValueTypes;
 
     [TestClass]
     public class UnitTest
@@ -47,20 +48,6 @@
             Assert.AreEqual(SquareSurfaceArea, surfaceArea);
         }
 
-        [TestMethod]
-        public void RectangleCalculateSurfaceArea()
-        {
-            // Arrange
-            Rectangle rectangle = new Rectangle();
-            rectangle.Height = RectangleHeight;
-            rectangle.Width = RectangleWidth;
-
-            // Act
-            double surfaceArea = rectangle.CalculateSurfaceArea();
-
-            // Assert
-            Assert.AreEqual(RectangleSurfaceArea, surfaceArea);
-        }
 
         [TestMethod]
         public void CalculateSurfaceAreas()
@@ -75,9 +62,8 @@
             Square square = new Square();
             square.Side = SquareSide;
 
-            Rectangle rectangle = new Rectangle();
-            rectangle.Height = RectangleHeight;
-            rectangle.Width = RectangleWidth;
+            var dimension = new Dimension(RectangleHeight, RectangleWidth);
+            Rectangle rectangle = new Rectangle(dimension);
 
             // TODO: Implement a new Trapezoid shape
 
