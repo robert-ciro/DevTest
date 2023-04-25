@@ -107,7 +107,7 @@
             surfaceAreaCalculator.Add(rectangle);
             // TODO: surfaceAreaCalculator.Add(trapezoid);
             surfaceAreaCalculator.CalculateSurfaceAreas();
-            var surfaceAreas = surfaceAreaCalculator.surfaceAreas;
+            var surfaceAreas = surfaceAreaCalculator.SurfaceAreas;
 
             // Assert
             Assert.AreEqual(expectedSurfaceAreas[0], surfaceAreas[0]);

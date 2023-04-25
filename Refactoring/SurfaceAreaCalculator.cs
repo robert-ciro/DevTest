@@ -2,13 +2,14 @@ namespace Refactoring
 {
     using System;
     using System.Collections.Generic;
-    using System.Linq;
 
     public class SurfaceAreaCalculator
     {
         private List<IGeometricShape> geometricShapes;
-        public List<double> surfaceAreas { get; set; }
+        private List<double> surfaceAreas;
         private readonly ILogger logger;
+        
+        public IReadOnlyList<double> SurfaceAreas => this.surfaceAreas.AsReadOnly();
 
         public SurfaceAreaCalculator(ILogger logger)
         {
