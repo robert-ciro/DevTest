@@ -51,14 +51,14 @@ namespace Refactoring
                                 square.Side = double.Parse(arrCommands[2]);
                                 this.Add(square);
                                 this.CalculateSurfaceAreas();
-                                Console.WriteLine("{0} created!", square.GetType().Name);
+                                Console.WriteLine($"{nameof(Square)} created!");
                                 break;
                             case "circle":
                                 Circle circle = new Circle();
                                 circle.Radius = double.Parse(arrCommands[2]);
                                 this.Add(circle);
                                 this.CalculateSurfaceAreas();
-                                Console.WriteLine("{0} created!", circle.GetType().Name);
+                                Console.WriteLine($"{nameof(Circle)} created!");
                                 break;
                             case "triangle":
                                 Triangle triangle = new Triangle();
@@ -66,7 +66,7 @@ namespace Refactoring
                                 triangle.Width = double.Parse(arrCommands[3]);
                                 this.Add(triangle);
                                 this.CalculateSurfaceAreas();
-                                Console.WriteLine("{0} created!", triangle.GetType().Name);
+                                Console.WriteLine($"{nameof(Triangle)} created!");
                                 break;
                             case "rectangle":
                                 Rectangle rectangle = new Rectangle();
@@ -74,7 +74,7 @@ namespace Refactoring
                                 rectangle.Width = double.Parse(arrCommands[3]);
                                 this.Add(rectangle);
                                 this.CalculateSurfaceAreas();
-                                Console.WriteLine("{0} created!", rectangle.GetType().Name);
+                                Console.WriteLine($"{nameof(Rectangle)} created!");
                                 break;
                             default:
                                 goto ShowCommands;
