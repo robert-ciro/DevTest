@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Entity\CircleTest.cs" />
     <Compile Include="Entity\RectangleTest.cs" />
+    <Compile Include="Entity\TriangleTest.cs" />
     <Compile Include="UnitTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ValueTypes\DimensionTest.cs" />

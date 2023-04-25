@@ -1,35 +1,18 @@
 namespace Refactoring.Entities
 {
+    using Refactoring.ValueTypes;
+
     public class Triangle : IGeometricShape
     {
-        double height;
-        public double Height
-        {
-            get
-            {
-                return height;
-            }
-            set
-            {
-                height = value;
-            }
-        }
-        double width;
-        public double Width
-        {
-            get
-            {
-                return width;
-            }
-            set
-            {
-                width = value;
-            }
-        }
+        public Dimension Dimension { get; }
 
+        public Triangle(Dimension dimension)
+        {
+            Dimension = dimension;
+        }
         public double CalculateSurfaceArea()
         {
-            return 0.5 * (this.height * this.width);
+            return 0.5 * (Dimension.Height * Dimension.Width);
         }
     }
 

@@ -20,21 +20,6 @@
         private const double RectangleSurfaceArea = 1541d;
 
         [TestMethod]
-        public void TriangleCalculateSurfaceArea()
-        {
-            // Arrange
-            Triangle triangle = new Triangle();
-            triangle.Height = TriangleHeight;
-            triangle.Width = TriangleWidth;
-
-            // Act
-            double surfaceArea = triangle.CalculateSurfaceArea();
-
-            // Assert
-            Assert.AreEqual(TriangleSurfaceArea, surfaceArea);
-        }
-
-        [TestMethod]
         public void SquareCalculateSurfaceArea()
         {
             // Arrange
@@ -53,9 +38,8 @@
         public void CalculateSurfaceAreas()
         {
             // Arrange
-            Triangle triangle = new Triangle();
-            triangle.Height = TriangleHeight;
-            triangle.Width = TriangleWidth;
+            var triangleDimension = new Dimension(TriangleHeight, TriangleWidth);
+            Triangle triangle = new Triangle(triangleDimension);
 
             Circle circle = new Circle(CircleRadius);
 

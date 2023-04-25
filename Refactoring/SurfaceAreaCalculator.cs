@@ -62,16 +62,15 @@ namespace Refactoring
                                 Console.WriteLine($"{nameof(Circle)} created!");
                                 break;
                             case "triangle":
-                                Triangle triangle = new Triangle();
-                                triangle.Height = double.Parse(arrCommands[2]);
-                                triangle.Width = double.Parse(arrCommands[3]);
+                                var triangleDimension = new Dimension(height: double.Parse(arrCommands[2]), width: double.Parse(arrCommands[3]));
+                                Triangle triangle = new Triangle(triangleDimension);
                                 this.Add(triangle);
                                 this.CalculateSurfaceAreas();
                                 Console.WriteLine($"{nameof(Triangle)} created!");
                                 break;
                             case "rectangle":
-                                var dimension = new Dimension(height: double.Parse(arrCommands[2]), width: double.Parse(arrCommands[3]));
-                                Rectangle rectangle = new Rectangle(dimension);
+                                var rectangleDimension = new Dimension(height: double.Parse(arrCommands[2]), width: double.Parse(arrCommands[3]));
+                                Rectangle rectangle = new Rectangle(rectangleDimension);
                                 this.Add(rectangle);
                                 this.CalculateSurfaceAreas();
                                 Console.WriteLine($"{nameof(Rectangle)} created!");
