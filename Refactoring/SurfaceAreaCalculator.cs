@@ -92,16 +92,16 @@ namespace Refactoring
                     this.ReadString(Console.ReadLine());
                     break;
                 case "print":
-                    if (surfaceAreas != null)
+                    if (surfaceAreas.Count is 0)
+                    {
+                        Console.WriteLine("There are no surface areas to print");
+                    }
+                    else
                     {
                         for (int i = 0; i < surfaceAreas.Count; i++)
                         {
                             Console.WriteLine("[{0}] {1} surface area is {2}", i, geometricShapes[i].GetType().Name, surfaceAreas[i]);
                         }
-                    }
-                    else
-                    {
-                        Console.WriteLine("There are no surface areas to print");
                     }
                     this.ReadString(Console.ReadLine());
                     break;
