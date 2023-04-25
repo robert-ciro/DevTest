@@ -1,4 +1,4 @@
-﻿namespace Refactoring.UnitTest
+﻿namespace SurfaceAreaCalculatorTest
 {
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Refactoring;
@@ -6,7 +6,7 @@
     using Refactoring.ValueTypes;
 
     [TestClass]
-    public class UnitTest
+    public class WhenCalculatingSurfaceAreas
     {
         private const double TriangleHeight = 13d;
         private const double TriangleWidth = 34d;
@@ -20,25 +20,19 @@
         private const double RectangleSurfaceArea = 1541d;
         
         [TestMethod]
-        public void CalculateSurfaceAreas()
+        public void ShouldReturnValidSurfaceAreas()
         {
             // Arrange
             var triangleDimension = new Dimension(TriangleHeight, TriangleWidth);
-            Triangle triangle = new Triangle(triangleDimension);
-
-            Circle circle = new Circle(CircleRadius);
-
-            Square square = new Square(SquareSide);
-
+            var triangle = new Triangle(triangleDimension);
+            var circle = new Circle(CircleRadius);
+            var square = new Square(SquareSide);
             var dimension = new Dimension(RectangleHeight, RectangleWidth);
-            Rectangle rectangle = new Rectangle(dimension);
+            var rectangle = new Rectangle(dimension);
 
             // TODO: Implement a new Trapezoid shape
-
-            double[] expectedSurfaceAreas = new double[] { TriangleSurfaceArea, CircleSurfaceArea, SquareSurfaceArea, RectangleSurfaceArea };
-
             // Act
-            SurfaceAreaCalculator surfaceAreaCalculator = new SurfaceAreaCalculator(new YummyLogger());
+            var surfaceAreaCalculator = new SurfaceAreaCalculator(new YummyLogger());
             surfaceAreaCalculator.Add(triangle);
             surfaceAreaCalculator.Add(circle);
             surfaceAreaCalculator.Add(square);
@@ -46,12 +40,11 @@
             // TODO: surfaceAreaCalculator.Add(trapezoid);
             surfaceAreaCalculator.CalculateSurfaceAreas();
             var surfaceAreas = surfaceAreaCalculator.SurfaceAreas;
-
             // Assert
-            Assert.AreEqual(expectedSurfaceAreas[0], surfaceAreas[0]);
-            Assert.AreEqual(expectedSurfaceAreas[1], surfaceAreas[1]);
-            Assert.AreEqual(expectedSurfaceAreas[2], surfaceAreas[2]);
-            Assert.AreEqual(expectedSurfaceAreas[3], surfaceAreas[3]);
+            Assert.AreEqual(expected: TriangleSurfaceArea, surfaceAreas[0]);
+            Assert.AreEqual(expected: CircleSurfaceArea, surfaceAreas[1]);
+            Assert.AreEqual(expected: SquareSurfaceArea, surfaceAreas[2]);
+            Assert.AreEqual(expected: RectangleSurfaceArea, surfaceAreas[3]);
         }
     }
     
