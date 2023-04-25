@@ -1,4 +1,4 @@
-namespace Refactoring
+namespace Refactoring.Entities
 {
     public interface IGeometricShape
     {

@@ -2,6 +2,7 @@ namespace Refactoring
 {
     using System;
     using System.Collections.Generic;
+    using Refactoring.Entities;
 
     public class SurfaceAreaCalculator
     {

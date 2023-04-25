@@ -1,9 +1,8 @@
 ﻿namespace Refactoring.UnitTest
 {
-    using System;
-    using System.Collections.Generic;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Refactoring;
+    using Refactoring.Entities;
 
     [TestClass]
     public class UnitTest
