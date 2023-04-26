@@ -2,15 +2,17 @@
 
 namespace Refactoring
 {
+    using Refactoring.Commands;
+
     class Program
     {
         static void Main(string[] args)
         {
             var logger = new Logger();
             Greet(logger);
-            SurfaceAreaCalculator surfaceAreaCalculator = new SurfaceAreaCalculator(logger);
-            surfaceAreaCalculator.ShowCommands();
-            surfaceAreaCalculator.ReadString(Console.ReadLine());
+            var surfaceAreaCalculator = new SurfaceAreaCalculator(logger);
+            var surfaceAreaCommandFactory = new SurfaceAreaCommandExecutor(logger, surfaceAreaCalculator);
+            surfaceAreaCommandFactory.ExecuteCommand("show");
             Console.ReadKey();
         }
 
