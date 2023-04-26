@@ -30,6 +30,7 @@ namespace Refactoring
             try
             {
                 this.surfaceAreas = new List<double>();
+
                 foreach (var geometricShape in this.geometricShapes)
                 {
                     this.surfaceAreas.Add(geometricShape.CalculateSurfaceArea());
