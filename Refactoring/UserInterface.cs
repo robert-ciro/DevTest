@@ -4,12 +4,12 @@ namespace Refactoring
 
     public interface IUserInterface
     {
-        string ReadMessage(string message);
+        string ReadMessage();
     }
     
     public class ConsoleUserInterface : IUserInterface
     {
-        public string ReadMessage(string message)
+        public string ReadMessage()
         {
             return Console.ReadLine();
         }

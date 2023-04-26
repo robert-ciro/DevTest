@@ -11,7 +11,7 @@ namespace Refactoring
             var logger = new Logger();
             Greet(logger);
             var surfaceAreaCalculator = new SurfaceAreaCalculator(logger);
-            var surfaceAreaCommandFactory = new SurfaceAreaCommandExecutor(logger, surfaceAreaCalculator);
+            var surfaceAreaCommandFactory = new SurfaceAreaCommandExecutor(logger, surfaceAreaCalculator, new ConsoleUserInterface());
             surfaceAreaCommandFactory.ExecuteCommand("show");
             Console.ReadKey();
         }

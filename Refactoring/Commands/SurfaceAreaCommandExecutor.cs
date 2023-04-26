@@ -8,11 +8,13 @@ namespace Refactoring.Commands
     {
         private readonly SurfaceAreaCalculator surfaceAreaCalculator;
         private readonly ILogger logger;
-        
-        public SurfaceAreaCommandExecutor(ILogger logger, SurfaceAreaCalculator surfaceAreaCalculator)
+        private readonly IUserInterface userInterface;
+
+        public SurfaceAreaCommandExecutor(ILogger logger, SurfaceAreaCalculator surfaceAreaCalculator, IUserInterface userInterface)
         {
             this.surfaceAreaCalculator = surfaceAreaCalculator;
             this.logger = logger;
+            this.userInterface = userInterface;
         }
 
         public void ExecuteCommand(string command)
@@ -68,11 +70,11 @@ namespace Refactoring.Commands
                     {
                         ShowCommands();
                     }
-                    this.ExecuteCommand(Console.ReadLine());
+                    this.ExecuteCommand(userInterface.ReadMessage());
                     break;
                 case "calculate":
                     surfaceAreaCalculator.CalculateSurfaceAreas();
-                    ExecuteCommand(Console.ReadLine());
+                    ExecuteCommand(userInterface.ReadMessage());
                     break;
                 case "print":
                     if (surfaceAreaCalculator.SurfaceAreas.Count is 0)
@@ -87,24 +89,24 @@ namespace Refactoring.Commands
                         }
                     }
 
-                    ExecuteCommand(Console.ReadLine());
+                    ExecuteCommand(userInterface.ReadMessage());
                     break;
                 case "reset":
                     surfaceAreaCalculator.Reset();
                     Console.WriteLine("Reset state!!");
-                    ExecuteCommand(Console.ReadLine());
+                    ExecuteCommand(userInterface.ReadMessage());
                     break;
                 case "exit":
                     break;
                 case "show":
                     ShowCommands();
-                    ExecuteCommand(Console.ReadLine());
+                    ExecuteCommand(userInterface.ReadMessage());
                     break;
                 default:
                     ShowCommands:
                     this.logger.Log("Unknown command!!!");
                     this.ShowCommands();
-                    ExecuteCommand(Console.ReadLine());
+                    ExecuteCommand(userInterface.ReadMessage());
                     break;
             }
         }
