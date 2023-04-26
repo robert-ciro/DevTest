@@ -31,7 +31,7 @@ namespace Refactoring.Commands
                                 Square square = new Square(double.Parse(arrCommands[2]));
                                 surfaceAreaCalculator.Add(square);
                                 surfaceAreaCalculator.CalculateSurfaceAreas();
-                                Console.WriteLine($"{nameof(Square)} created!");
+                                logger.Log($"{nameof(Square)} created!");
                                 break;
                             case "circle":
                                 Circle circle = new Circle(double.Parse(arrCommands[2]));
@@ -44,14 +44,14 @@ namespace Refactoring.Commands
                                 var triangle = new Triangle(triangleDimension);
                                 surfaceAreaCalculator.Add(triangle);
                                 surfaceAreaCalculator.CalculateSurfaceAreas();
-                                Console.WriteLine($"{nameof(Triangle)} created!");
+                                logger.Log($"{nameof(Triangle)} created!");
                                 break;
                             case "rectangle":
                                 var rectangleDimension = new Dimension(height: double.Parse(arrCommands[2]), width: double.Parse(arrCommands[3]));
                                 var rectangle = new Rectangle(rectangleDimension);
                                 surfaceAreaCalculator.Add(rectangle);
                                 surfaceAreaCalculator.CalculateSurfaceAreas();
-                                Console.WriteLine($"{nameof(Rectangle)} created!");
+                                logger.Log($"{nameof(Rectangle)} created!");
                                 break;
                             case "trapezoid":
                                 var trapezoid = new Trapezoid(
@@ -60,7 +60,7 @@ namespace Refactoring.Commands
                                     height: double.Parse(arrCommands[4]));
                                 surfaceAreaCalculator.Add(trapezoid);
                                 surfaceAreaCalculator.CalculateSurfaceAreas();
-                                Console.WriteLine($"{nameof(Trapezoid)} created!");
+                                logger.Log($"{nameof(Trapezoid)} created!");
                                 break;
                             default:
                                 goto ShowCommands;
@@ -79,13 +79,13 @@ namespace Refactoring.Commands
                 case "print":
                     if (surfaceAreaCalculator.SurfaceAreas.Count is 0)
                     {
-                        Console.WriteLine("There are no surface areas to print");
+                        logger.Log("There are no surface areas to print");
                     }
                     else
                     {
                         for (int i = 0; i < surfaceAreaCalculator.SurfaceAreas.Count; i++)
                         {
-                            Console.WriteLine("[{0}] {1} surface area is {2}", i, surfaceAreaCalculator.GeometricShapes[i].GetType().Name, surfaceAreaCalculator.SurfaceAreas[i]);
+                            logger.Log($"[{i}] {surfaceAreaCalculator.GeometricShapes[i].GetType().Name} surface area is {surfaceAreaCalculator.SurfaceAreas[i]}");
                         }
                     }
 
@@ -93,7 +93,7 @@ namespace Refactoring.Commands
                     break;
                 case "reset":
                     surfaceAreaCalculator.Reset();
-                    Console.WriteLine("Reset state!!");
+                    logger.Log("Reset state!!");
                     ExecuteCommand(userInterface.ReadMessage());
                     break;
                 case "exit":
