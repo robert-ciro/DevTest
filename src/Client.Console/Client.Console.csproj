@@ -8,7 +8,7 @@
     <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Refactoring</RootNamespace>
-    <AssemblyName>Refactoring</AssemblyName>
+    <AssemblyName>Client.Console</AssemblyName>
     <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -53,11 +53,11 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\src\Domain\Domain.csproj">
+    <ProjectReference Include="..\Domain\Domain.csproj">
       <Project>{a662bffb-1c82-4383-b572-8e035dbbad5f}</Project>
       <Name>Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\src\Application\Application.csproj">
+    <ProjectReference Include="..\Application\Application.csproj">
       <Project>{ed990be8-b8e9-4c6e-be37-e1c1fd3b0ed3}</Project>
       <Name>Application</Name>
     </ProjectReference>
