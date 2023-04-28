@@ -27,7 +27,6 @@ namespace Refactoring.Commands
             var triangle = new Triangle(dimension);
 
             surfaceAreaCalculator.Add(triangle);
-            surfaceAreaCalculator.CalculateSurfaceAreas();
             logger.Log($"{nameof(Triangle)} created!");
             
             return (false, true);

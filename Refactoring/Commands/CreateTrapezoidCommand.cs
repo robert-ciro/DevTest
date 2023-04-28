@@ -27,7 +27,6 @@ namespace Refactoring.Commands
                                           height: double.Parse(match.Groups[3].Value));
 
             surfaceAreaCalculator.Add(trapezoid);
-            surfaceAreaCalculator.CalculateSurfaceAreas();
             logger.Log($"{nameof(Trapezoid)} created!");
             
             return (false, true);

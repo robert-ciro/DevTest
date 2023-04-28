@@ -25,7 +25,6 @@ namespace Refactoring.Commands
             var circle = new Circle(radius: double.Parse(match.Groups[0].Value));
 
             surfaceAreaCalculator.Add(circle);
-            surfaceAreaCalculator.CalculateSurfaceAreas();
             logger.Log($"{nameof(Circle)} created!");
             
             return (false, true);

@@ -25,7 +25,6 @@ namespace Refactoring.Commands
             var square = new Square(side: double.Parse(match.Groups[0].Value));
 
             surfaceAreaCalculator.Add(square);
-            surfaceAreaCalculator.CalculateSurfaceAreas();
             logger.Log($"{nameof(Square)} created!");
             
             return (false, true);

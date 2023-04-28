@@ -27,7 +27,6 @@ namespace Refactoring.Commands
             var rectangle = new Rectangle(dimension);
 
             surfaceAreaCalculator.Add(rectangle);
-            surfaceAreaCalculator.CalculateSurfaceAreas();
             logger.Log($"{nameof(Rectangle)} created!");
             
             return (false, true);
