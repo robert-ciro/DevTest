@@ -1,11 +1,7 @@
 namespace Refactoring
 {
     using System;
-
-    public interface ILogger
-    {
-        void Log(string message);
-    }
+    using Application;
 
     internal class Logger : ILogger
     {

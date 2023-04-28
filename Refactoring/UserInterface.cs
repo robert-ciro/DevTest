@@ -1,12 +1,8 @@
 namespace Refactoring
 {
     using System;
+    using Application;
 
-    public interface IUserInterface
-    {
-        string ReadMessage();
-    }
-    
     public class ConsoleUserInterface : IUserInterface
     {
         public string ReadMessage()

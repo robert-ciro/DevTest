@@ -43,20 +43,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Commands\CalculateCommand.cs" />
-    <Compile Include="Commands\CreateCircleCommand.cs" />
-    <Compile Include="Commands\CreateRectangleCommand.cs" />
-    <Compile Include="Commands\CreateSquareCommand.cs" />
-    <Compile Include="Commands\CreateSurfaceAreaCommand.cs" />
-    <Compile Include="Commands\CreateTrapezoidCommand.cs" />
-    <Compile Include="Commands\CreateTriangleCommand.cs" />
-    <Compile Include="Commands\ExitCommand.cs" />
-    <Compile Include="Commands\HelpCommands.cs" />
-    <Compile Include="Commands\ICommand.cs" />
-    <Compile Include="Commands\PrintCommand.cs" />
-    <Compile Include="Commands\ResetCommand.cs" />
-    <Compile Include="Commands\SurfaceAreaCommandFactory.cs" />
-    <Compile Include="Commands\UnknownCommand.cs" />
+    <Compile Include="GeometricShapeService.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -69,6 +56,10 @@
     <ProjectReference Include="..\src\Domain\Domain.csproj">
       <Project>{a662bffb-1c82-4383-b572-8e035dbbad5f}</Project>
       <Name>Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\src\Application\Application.csproj">
+      <Project>{ed990be8-b8e9-4c6e-be37-e1c1fd3b0ed3}</Project>
+      <Name>Application</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
