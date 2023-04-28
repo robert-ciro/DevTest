@@ -2,6 +2,7 @@
 
 namespace Refactoring
 {
+    using System.Linq;
     using Refactoring.Commands;
 
     class Program
@@ -9,11 +10,44 @@ namespace Refactoring
         static void Main(string[] args)
         {
             var logger = new Logger();
-            Greet(logger);
             var surfaceAreaCalculator = new SurfaceAreaCalculator(logger);
-            var surfaceAreaCommandFactory = new SurfaceAreaCommandExecutor(logger, surfaceAreaCalculator, new ConsoleUserInterface());
-            surfaceAreaCommandFactory.ExecuteCommand("show");
+            var consoleUserInterface = new ConsoleUserInterface();
+            var commandFactory = new SurfaceAreaCommandFactory(logger, surfaceAreaCalculator);
+            
+            Greet(logger);
+
+            var result = ExecuteCommand(commandFactory.Create("show"));
+
+            while (result.shouldQuit is false)
+            {
+                var input = consoleUserInterface.ReadMessage();
+                var commands = input.Split(' ');
+                var command = commandFactory.Create(commands[0]);
+
+                result = ExecuteCommand(command, commands);
+
+                if(result.executedSuccesfully is false)
+                   result = ExecuteCommand(commandFactory.Create("show"));
+            }
             Console.ReadKey();
+        }
+
+        private static (bool shouldQuit, bool executedSuccesfully) ExecuteCommand(ICommand command, params string[] commands)
+        {
+            (bool shouldQuit, bool executedSuccesfully) result;
+            switch (command)
+            {
+                case IParameterizedCommand parameterizedCommand:
+                    result = parameterizedCommand.Execute(commands.Skip(1).ToArray());
+                    break;
+                case INonParameterizedCommand nonParameterizedCommand:
+                    result = nonParameterizedCommand.Execute();
+                    break;
+                default:
+                    throw new NotSupportedException("Command not supported");
+            }
+
+            return result;
         }
 
         private static void Greet(ILogger logger)

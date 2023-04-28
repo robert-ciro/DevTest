@@ -7,11 +7,11 @@ namespace Refactoring.Commands
 
     public interface INonParameterizedCommand : ICommand
     {
-        bool Execute();
+        (bool shouldQuit, bool executedSuccesfully) Execute();
     }
     
     public interface IParameterizedCommand : ICommand
     {
-        bool Execute(params string[] parameters);
+        (bool shouldQuit, bool executedSuccesfully) Execute(params string[] parameters);
     }
 }

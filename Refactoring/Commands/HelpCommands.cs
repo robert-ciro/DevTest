@@ -11,7 +11,7 @@ namespace Refactoring.Commands
             this.logger = logger;
         }
 
-        public bool Execute()
+        public (bool shouldQuit, bool executedSuccesfully) Execute()
         {
             this.logger.Log("commands:");
             this.logger.Log("- create square {double} (create a new square)");
@@ -22,7 +22,7 @@ namespace Refactoring.Commands
             this.logger.Log("- calculate (calulate the surface areas of the created shapes)");
             this.logger.Log("- reset (reset)");
             this.logger.Log("- exit (exit the loop)");
-            return true;
+            return (false, true);
         }
     }
 }

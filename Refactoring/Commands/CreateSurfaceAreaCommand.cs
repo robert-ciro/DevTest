@@ -15,10 +15,10 @@ namespace Refactoring.Commands
             this.surfaceAreaCalculator = surfaceAreaCalculator;
         }
 
-        public bool Execute(params string[] commands)
+        public (bool shouldQuit, bool executedSuccesfully) Execute(params string[] commands)
         {
             if(commands.Length is 0)
-                return false;
+                return (false, false);
             
              switch (commands[0].ToLower())
             {
@@ -38,10 +38,10 @@ namespace Refactoring.Commands
                     CreateTrapezoid(double.Parse(commands[1]), double.Parse(commands[2]), double.Parse(commands[3]));
                     break;
                 default:
-                    return false;
+                    return (false, false);
             }
              
-            return true;
+             return (false, true);
         }
 
         private void CreateTrapezoid(double top, double bottom, double height)

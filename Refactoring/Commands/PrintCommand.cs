@@ -13,7 +13,7 @@ namespace Refactoring.Commands
             this.surfaceAreaCalculator = surfaceAreaCalculator;
         }
 
-        public bool Execute()
+        public (bool shouldQuit, bool executedSuccesfully) Execute()
         {
             if (surfaceAreaCalculator.SurfaceAreas.Count is 0)
             {
@@ -28,7 +28,7 @@ namespace Refactoring.Commands
                 logger.Log($"[{index}] {geometricShapeName} surface area is {value}");
             }
 
-            return true;
+            return (false, true);
         }
     }
 }

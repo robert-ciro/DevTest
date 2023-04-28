@@ -11,12 +11,10 @@ namespace Refactoring.Commands
             this.surfaceAreaCalculator = surfaceAreaCalculator;
         }
         
-        public bool Execute()
+        public (bool shouldQuit, bool executedSuccesfully) Execute()
         {
-            surfaceAreaCalculator.Reset();
-            logger.Log("Reset state!!");
-
-            return true;
+            surfaceAreaCalculator.CalculateSurfaceAreas();
+            return (false, true);
         }
     }
 }
