@@ -1,34 +1,37 @@
-namespace Refactoring.Commands
+namespace Application.Commands
 {
     using System.Text.RegularExpressions;
+    using Application.Dtos;
     using Domain;
     using Domain.Entities;
 
     public class CreateSquareCommand : IParameterizedCommand
     {
-        private readonly ILogger logger;
         private readonly SurfaceAreaCalculator surfaceAreaCalculator;
         private const string PARAMETERS_PATTERN =@"^\d+$";
         
-        public CreateSquareCommand(ILogger logger, SurfaceAreaCalculator surfaceAreaCalculator)
+        public CreateSquareCommand(SurfaceAreaCalculator surfaceAreaCalculator)
         {
-            this.logger = logger;
             this.surfaceAreaCalculator = surfaceAreaCalculator;
         }
 
-        public (bool shouldQuit, bool executedSuccesfully) Execute(string parameters)
+        public CommandResponse Execute(string parameters)
         {
             var match = Regex.Match(parameters, PARAMETERS_PATTERN, RegexOptions.IgnoreCase);
             
             if (match.Success is false)
-                return (false, false);
+                return new CommandResponse { ShouldQuit = false, ExecutedSuccessfully = false };
  
             var square = new Square(side: double.Parse(match.Groups[0].Value));
-
-            surfaceAreaCalculator.Add(square);
-            logger.Log($"{nameof(Square)} created!");
             
-            return (false, true);
+            surfaceAreaCalculator.Add(square);
+            
+            return new CommandResponse
+            {
+                ShouldQuit = false,
+                ExecutedSuccessfully = true,
+                Message = $"{nameof(Square)} created!"
+            };
         }
     }
 }
