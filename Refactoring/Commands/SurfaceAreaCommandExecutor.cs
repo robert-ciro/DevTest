@@ -1,9 +1,7 @@
 namespace Refactoring.Commands
 {
-    using System;
-    using Refactoring.Entities;
-    using Refactoring.ValueTypes;
-    
+    using System.Linq;
+
     public class SurfaceAreaCommandExecutor
     {
         private readonly SurfaceAreaCalculator surfaceAreaCalculator;
@@ -23,77 +21,22 @@ namespace Refactoring.Commands
             switch (arrCommands[0].ToLower())
             {
                 case "create":
-                    if (arrCommands.Length > 1)
-                    {
-                        switch (arrCommands[1].ToLower())
-                        {
-                            case "square":
-                                Square square = new Square(double.Parse(arrCommands[2]));
-                                surfaceAreaCalculator.Add(square);
-                                surfaceAreaCalculator.CalculateSurfaceAreas();
-                                logger.Log($"{nameof(Square)} created!");
-                                break;
-                            case "circle":
-                                Circle circle = new Circle(double.Parse(arrCommands[2]));
-                                surfaceAreaCalculator.Add(circle);
-                                surfaceAreaCalculator.CalculateSurfaceAreas();
-                                Console.WriteLine($"{nameof(Circle)} created!");
-                                break;
-                            case "triangle":
-                                var triangleDimension = new Dimension(height: double.Parse(arrCommands[2]), width: double.Parse(arrCommands[3]));
-                                var triangle = new Triangle(triangleDimension);
-                                surfaceAreaCalculator.Add(triangle);
-                                surfaceAreaCalculator.CalculateSurfaceAreas();
-                                logger.Log($"{nameof(Triangle)} created!");
-                                break;
-                            case "rectangle":
-                                var rectangleDimension = new Dimension(height: double.Parse(arrCommands[2]), width: double.Parse(arrCommands[3]));
-                                var rectangle = new Rectangle(rectangleDimension);
-                                surfaceAreaCalculator.Add(rectangle);
-                                surfaceAreaCalculator.CalculateSurfaceAreas();
-                                logger.Log($"{nameof(Rectangle)} created!");
-                                break;
-                            case "trapezoid":
-                                var trapezoid = new Trapezoid(
-                                    top: double.Parse(arrCommands[2]),
-                                    bottom: double.Parse(arrCommands[3]),
-                                    height: double.Parse(arrCommands[4]));
-                                surfaceAreaCalculator.Add(trapezoid);
-                                surfaceAreaCalculator.CalculateSurfaceAreas();
-                                logger.Log($"{nameof(Trapezoid)} created!");
-                                break;
-                            default:
-                                goto ShowCommands;
-                        }
-                    }
-                    else
+                    if (arrCommands.Length < 2 || new CreateSurfaceAreaCommand(logger, surfaceAreaCalculator).Execute(arrCommands.Skip(1).ToArray()) is false)
                     {
                         new HelpCommand(logger).Execute();
                     }
                     this.ExecuteCommand(userInterface.ReadMessage());
                     break;
                 case "calculate":
-                    surfaceAreaCalculator.CalculateSurfaceAreas();
+                    new CalculateCommand(logger, surfaceAreaCalculator).Execute();
                     ExecuteCommand(userInterface.ReadMessage());
                     break;
                 case "print":
-                    if (surfaceAreaCalculator.SurfaceAreas.Count is 0)
-                    {
-                        logger.Log("There are no surface areas to print");
-                    }
-                    else
-                    {
-                        for (int i = 0; i < surfaceAreaCalculator.SurfaceAreas.Count; i++)
-                        {
-                            logger.Log($"[{i}] {surfaceAreaCalculator.GeometricShapes[i].GetType().Name} surface area is {surfaceAreaCalculator.SurfaceAreas[i]}");
-                        }
-                    }
-
+                    new PrintCommand(logger, surfaceAreaCalculator).Execute();
                     ExecuteCommand(userInterface.ReadMessage());
                     break;
                 case "reset":
-                    surfaceAreaCalculator.Reset();
-                    logger.Log("Reset state!!");
+                    new ResetCommand(logger, surfaceAreaCalculator).Execute();
                     ExecuteCommand(userInterface.ReadMessage());
                     break;
                 case "exit":
@@ -104,7 +47,7 @@ namespace Refactoring.Commands
                     break;
                 default:
                     ShowCommands:
-                    this.logger.Log("Unknown command!!!");
+                    new UnknownCommand(logger).Execute();
                     new HelpCommand(logger).Execute();
                     ExecuteCommand(userInterface.ReadMessage());
                     break;

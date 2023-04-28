@@ -2,7 +2,7 @@ namespace Refactoring.Commands
 {
     using Refactoring;
 
-    public class HelpCommand
+    public class HelpCommand : INonParameterizedCommand
     {
         private readonly ILogger logger;
 
@@ -11,7 +11,7 @@ namespace Refactoring.Commands
             this.logger = logger;
         }
 
-        public void Execute()
+        public bool Execute()
         {
             this.logger.Log("commands:");
             this.logger.Log("- create square {double} (create a new square)");
@@ -22,6 +22,7 @@ namespace Refactoring.Commands
             this.logger.Log("- calculate (calulate the surface areas of the created shapes)");
             this.logger.Log("- reset (reset)");
             this.logger.Log("- exit (exit the loop)");
+            return true;
         }
     }
 }
