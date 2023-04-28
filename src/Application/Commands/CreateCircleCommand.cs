@@ -20,15 +20,13 @@ namespace Application.Commands
             var match = Regex.Match(parameters, PARAMETERS_PATTERN, RegexOptions.IgnoreCase);
             
             if (match.Success is false)
-                return new CommandResponse { ShouldQuit = false, ExecutedSuccessfully = false };
- 
+                return new ();
+            
             var circle = new Circle(radius: double.Parse(match.Groups[0].Value));
             surfaceAreaCalculator.Add(circle);
 
-            return new CommandResponse
+            return new (ExecutedSuccessfully: true)
             {
-                ShouldQuit = false,
-                ExecutedSuccessfully = true,
                 Message = $"{nameof(Circle)} created!"
             };
         }

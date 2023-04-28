@@ -21,17 +21,15 @@ namespace Application.Commands
             var match = Regex.Match(parameters, PARAMETERS_PATTERN, RegexOptions.IgnoreCase);
             
             if (match.Success is false)
-                return new CommandResponse{ ShouldQuit = false, ExecutedSuccessfully = false};
+                return new ();
  
             var dimension = new Dimension(height: double.Parse(match.Groups[1].Value), width: double.Parse(match.Groups[2].Value));
             var rectangle = new Rectangle(dimension);
 
             surfaceAreaCalculator.Add(rectangle);
             
-            return new CommandResponse
+            return new (ExecutedSuccessfully: true)
             {
-                ShouldQuit = false,
-                ExecutedSuccessfully = false,
                 Message = $"{nameof(Rectangle)} created!"
             };
         }

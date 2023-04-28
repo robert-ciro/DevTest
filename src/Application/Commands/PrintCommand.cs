@@ -17,10 +17,8 @@ namespace Application.Commands
         public CommandResponse Execute()
         {
             if (surfaceAreaCalculator.SurfaceAreas.Count is 0)
-                return new CommandResponse
+                return new()
                 {
-                    ShouldQuit = false,
-                    ExecutedSuccessfully = false,
                     Message =  "There are no surface areas to print"
                 };
 
@@ -31,10 +29,8 @@ namespace Application.Commands
                                                    tuple =>
                                                        $"[{tuple.index}] {geometricShape[tuple.index].Name} surface area is {tuple.value}")
                                                .ToArray();
-            return new CommandResponse
+            return new (ExecutedSuccessfully: true)
             {
-                ShouldQuit = false,
-                ExecutedSuccessfully = true,
                 Message = string.Join(Environment.NewLine, messageBySurfaceArea)
             };
         }

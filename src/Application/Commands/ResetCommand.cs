@@ -15,10 +15,8 @@ namespace Application.Commands
         public CommandResponse Execute()
         {
             surfaceAreaCalculator.Reset();
-            return new CommandResponse
+            return new (ExecutedSuccessfully: true)
             {
-                ShouldQuit = false,
-                ExecutedSuccessfully = true,
                 Message = "Reset state!!"
             };
         }

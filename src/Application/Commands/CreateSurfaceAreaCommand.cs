@@ -20,7 +20,7 @@ namespace Application.Commands
             var match = Regex.Match(parameters, GEOMETRY_SHAPES_WITH_PARAMETERS_PATTERN, RegexOptions.IgnoreCase);
 
             if (match.Success is false)
-                return new CommandResponse { ShouldQuit = false, ExecutedSuccessfully = false };
+                return new();
 
             var geometryShape = match.Groups[1].Value;
             var nextParameters = match.Groups[2].Value;
@@ -38,7 +38,7 @@ namespace Application.Commands
                 case "trapezoid":
                     return new CreateTrapezoidCommand(surfaceAreaCalculator).Execute(nextParameters);
                 default:
-                    return new CommandResponse { ShouldQuit = false, ExecutedSuccessfully = false };
+                    return new(ExecutedSuccessfully: false);
             }
         }
     }

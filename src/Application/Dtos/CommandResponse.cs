@@ -1,10 +1,4 @@
 namespace Application.Dtos
 {
-    public class CommandResponse
-    {
-        public bool ExecutedSuccessfully { get; set; }
-        public bool ShouldQuit { get; set; }
-        
-        public string Message { get; set; }
-    }
+    public record CommandResponse(bool ExecutedSuccessfully = false, bool ShouldQuit = false, string Message = "");
 }

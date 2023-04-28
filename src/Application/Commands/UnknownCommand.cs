@@ -7,10 +7,8 @@ namespace Application.Commands
     {
         public CommandResponse Execute()
         {
-            return new CommandResponse
+            return new (ExecutedSuccessfully: true)
             {
-                ShouldQuit = false,
-                ExecutedSuccessfully = true,
                 Message = string.Join(Environment.NewLine, "Unknown command", new HelpCommand().Execute().Message)
             };
         }

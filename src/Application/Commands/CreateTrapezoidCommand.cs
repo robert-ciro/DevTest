@@ -20,7 +20,7 @@ namespace Application.Commands
             var match = Regex.Match(parameters, PARAMETERS_PATTERN, RegexOptions.IgnoreCase);
             
             if (match.Success is false)
-                return new CommandResponse { ShouldQuit = false, ExecutedSuccessfully = false };
+                return new ();
  
             var trapezoid = new Trapezoid(top: double.Parse(match.Groups[1].Value),
                                           bottom: double.Parse(match.Groups[2].Value),
@@ -28,10 +28,8 @@ namespace Application.Commands
 
             surfaceAreaCalculator.Add(trapezoid);
             
-            return new CommandResponse
+            return new (ExecutedSuccessfully: true)
             {
-                ShouldQuit = false,
-                ExecutedSuccessfully = true,
                 Message = $"{nameof(Trapezoid)} created!"
             };
         }

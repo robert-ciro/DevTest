@@ -6,7 +6,7 @@ namespace Application.Commands
     {
         public CommandResponse Execute()
         {
-            return new CommandResponse { ShouldQuit = true, ExecutedSuccessfully = true };
+            return new CommandResponse(ShouldQuit: true, ExecutedSuccessfully: true);
         }
     }
 }
