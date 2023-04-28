@@ -16,29 +16,28 @@ namespace Refactoring
             
             Greet(logger);
 
-            var result = ExecuteCommand(commandFactory.Create("show"));
+            var result = ExecuteCommand(commandFactory.Create("show").command);
 
             while (result.shouldQuit is false)
             {
                 var input = consoleUserInterface.ReadMessage();
-                var commands = input.Split(' ');
-                var command = commandFactory.Create(commands[0]);
+                var (command, parameters) = commandFactory.Create(input);
 
-                result = ExecuteCommand(command, commands);
+                result = ExecuteCommand(command, parameters);
 
                 if(result.executedSuccesfully is false)
-                   result = ExecuteCommand(commandFactory.Create("show"));
+                   result = ExecuteCommand(commandFactory.Create("show").command);
             }
             Console.ReadKey();
         }
 
-        private static (bool shouldQuit, bool executedSuccesfully) ExecuteCommand(ICommand command, params string[] commands)
+        private static (bool shouldQuit, bool executedSuccesfully) ExecuteCommand(ICommand command, string parameters = null)
         {
             (bool shouldQuit, bool executedSuccesfully) result;
             switch (command)
             {
                 case IParameterizedCommand parameterizedCommand:
-                    result = parameterizedCommand.Execute(commands.Skip(1).ToArray());
+                    result = parameterizedCommand.Execute(parameters);
                     break;
                 case INonParameterizedCommand nonParameterizedCommand:
                     result = nonParameterizedCommand.Execute();

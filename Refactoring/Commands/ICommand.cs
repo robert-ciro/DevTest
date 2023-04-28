@@ -12,6 +12,6 @@ namespace Refactoring.Commands
     
     public interface IParameterizedCommand : ICommand
     {
-        (bool shouldQuit, bool executedSuccesfully) Execute(params string[] parameters);
+        (bool shouldQuit, bool executedSuccesfully) Execute(string parameters);
     }
 }

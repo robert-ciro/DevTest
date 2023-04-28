@@ -1,11 +1,11 @@
 namespace Refactoring.Commands
 {
-    using System;
-    using Refactoring.Entities;
-    using Refactoring.ValueTypes;
+    using System.Text.RegularExpressions;
 
     public class CreateSurfaceAreaCommand : IParameterizedCommand
     {
+        private const string GEOMETRY_SHAPES_WITH_PARAMETERS_PATTERN = @"^(square|circle|triangle|rectangle|trapezoid) ?(.*)$";
+
         private readonly ILogger logger;
         private readonly SurfaceAreaCalculator surfaceAreaCalculator;
 
@@ -15,75 +15,31 @@ namespace Refactoring.Commands
             this.surfaceAreaCalculator = surfaceAreaCalculator;
         }
 
-        public (bool shouldQuit, bool executedSuccesfully) Execute(params string[] commands)
+        public (bool shouldQuit, bool executedSuccesfully) Execute(string parameters)
         {
-            if(commands.Length is 0)
+            var match = Regex.Match(parameters, GEOMETRY_SHAPES_WITH_PARAMETERS_PATTERN, RegexOptions.IgnoreCase);
+
+            if (match.Success is false)
                 return (false, false);
-            
-             switch (commands[0].ToLower())
+
+            var geometryShape = match.Groups[1].Value;
+            var nextParameters = match.Groups[2].Value;
+
+            switch (geometryShape)
             {
                 case "square":
-                    CreateSquare(double.Parse(commands[1]));
-                    break;
+                    return new CreateSquareCommand(logger, surfaceAreaCalculator).Execute(nextParameters);
                 case "circle":
-                    CreateCircle(double.Parse(commands[1]));
-                    break;
+                   return new CreateCircleCommand(logger, surfaceAreaCalculator).Execute(nextParameters);
                 case "triangle":
-                    CreateTriangle(double.Parse(commands[1]), double.Parse(commands[2]));
-                    break;
+                    return new CreateTriangleCommand(logger, surfaceAreaCalculator).Execute(nextParameters);
                 case "rectangle":
-                    CreateRectangle(double.Parse(commands[1]), double.Parse(commands[2]));
-                    break;
+                    return new CreateRectangleCommand(logger, surfaceAreaCalculator).Execute(nextParameters);
                 case "trapezoid":
-                    CreateTrapezoid(double.Parse(commands[1]), double.Parse(commands[2]), double.Parse(commands[3]));
-                    break;
+                    return new CreateTrapezoidCommand(logger, surfaceAreaCalculator).Execute(nextParameters);
                 default:
                     return (false, false);
             }
-             
-             return (false, true);
-        }
-
-        private void CreateTrapezoid(double top, double bottom, double height)
-        {
-            var trapezoid = new Trapezoid(top, bottom, height);
-            surfaceAreaCalculator.Add(trapezoid);
-            surfaceAreaCalculator.CalculateSurfaceAreas();
-            logger.Log($"{nameof(Trapezoid)} created!");
-        }
-
-        private void CreateRectangle(double height, double width)
-        {
-            var dimension = new Dimension(height, width);
-            var rectangle = new Rectangle(dimension);
-            surfaceAreaCalculator.Add(rectangle);
-            surfaceAreaCalculator.CalculateSurfaceAreas();
-            logger.Log($"{nameof(Rectangle)} created!");
-        }
-
-        private void CreateTriangle(double height, double width)
-        {
-            var dimension = new Dimension(height, width);
-            var triangle = new Triangle(dimension);
-            surfaceAreaCalculator.Add(triangle);
-            surfaceAreaCalculator.CalculateSurfaceAreas();
-            logger.Log($"{nameof(Triangle)} created!");
-        }
-
-        private void CreateCircle(double radius)
-        {
-            var circle = new Circle(radius);
-            surfaceAreaCalculator.Add(circle);
-            surfaceAreaCalculator.CalculateSurfaceAreas();
-            Console.WriteLine($"{nameof(Circle)} created!");
-        }
-
-        private void CreateSquare(double side)
-        {
-            var square = new Square(side);
-            surfaceAreaCalculator.Add(square);
-            surfaceAreaCalculator.CalculateSurfaceAreas();
-            logger.Log($"{nameof(Square)} created!");
         }
     }
 }

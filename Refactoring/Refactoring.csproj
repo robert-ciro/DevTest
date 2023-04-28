@@ -44,7 +44,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Commands\CalculateCommand.cs" />
+    <Compile Include="Commands\CreateCircleCommand.cs" />
+    <Compile Include="Commands\CreateRectangleCommand.cs" />
+    <Compile Include="Commands\CreateSquareCommand.cs" />
     <Compile Include="Commands\CreateSurfaceAreaCommand.cs" />
+    <Compile Include="Commands\CreateTrapezoidCommand.cs" />
+    <Compile Include="Commands\CreateTriangleCommand.cs" />
     <Compile Include="Commands\ExitCommand.cs" />
     <Compile Include="Commands\HelpCommands.cs" />
     <Compile Include="Commands\ICommand.cs" />
