@@ -2,6 +2,7 @@ namespace Refactoring.Entities
 {
     public class Trapezoid : IGeometricShape
     {
+        public string Name { get; } = nameof(Trapezoid);
         public double Top { get; }
         public double Bottom { get; }
         public double Height { get; }

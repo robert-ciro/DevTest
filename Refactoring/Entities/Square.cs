@@ -4,6 +4,7 @@ namespace Refactoring.Entities
 
     public class Square : IGeometricShape
     {
+        public string Name { get; } = nameof(Square);
         public double Side { get; }
 
         public Square(double side)

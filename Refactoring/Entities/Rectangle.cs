@@ -4,6 +4,7 @@ namespace Refactoring.Entities
 
     public class Rectangle : IGeometricShape
     {
+        public string Name { get; } = nameof(Rectangle);
         public Dimension Dimension { get; } 
         
         public Rectangle(Dimension dimension)

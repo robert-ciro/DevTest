@@ -4,6 +4,7 @@ namespace Refactoring.Entities
 
     public class Triangle : IGeometricShape
     {
+        public string Name { get; } = nameof(Triangle);
         public Dimension Dimension { get; }
 
         public Triangle(Dimension dimension)

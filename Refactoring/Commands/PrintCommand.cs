@@ -24,7 +24,7 @@ namespace Refactoring.Commands
 
             foreach (var (index, value) in surfaceAreasWithIndex)
             {
-                var geometricShapeName = surfaceAreaCalculator.GeometricShapes[index].GetType().Name;
+                var geometricShapeName = surfaceAreaCalculator.GeometricShapes[index].Name;
                 logger.Log($"[{index}] {geometricShapeName} surface area is {value}");
             }
 

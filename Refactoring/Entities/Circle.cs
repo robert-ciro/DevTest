@@ -4,6 +4,7 @@ namespace Refactoring.Entities
 
     public class Circle : IGeometricShape
     {
+        public string Name { get; } = nameof(Circle);
         public double Radius { get; }
 
         public Circle(double radius)
