@@ -16,6 +16,20 @@ namespace Refactoring
             
             Greet(logger);
 
+            try
+            {
+                Start(commandFactory, consoleUserInterface);
+            }
+            catch (Exception e)
+            {
+                logger.Log("Something went wrong :(");
+                Start(commandFactory, consoleUserInterface);
+            }
+           
+        }
+
+        private static void Start(SurfaceAreaCommandFactory commandFactory, ConsoleUserInterface consoleUserInterface)
+        {
             var result = ExecuteCommand(commandFactory.Create("show").command);
 
             while (result.shouldQuit is false)
@@ -25,9 +39,10 @@ namespace Refactoring
 
                 result = ExecuteCommand(command, parameters);
 
-                if(result.executedSuccesfully is false)
-                   result = ExecuteCommand(commandFactory.Create("show").command);
+                if (result.executedSuccesfully is false)
+                    result = ExecuteCommand(commandFactory.Create("show").command);
             }
+
             Console.ReadKey();
         }
 
