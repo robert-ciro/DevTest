@@ -14,6 +14,7 @@ namespace Refactoring.Commands
         public (bool shouldQuit, bool executedSuccesfully) Execute()
         {
             surfaceAreaCalculator.CalculateSurfaceAreas();
+            logger.Log("Surface areas calculated!");
             return (false, true);
         }
     }
