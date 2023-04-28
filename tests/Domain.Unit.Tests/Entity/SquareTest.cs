@@ -1,6 +1,6 @@
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Refactoring.Entities;
+using Domain.Entities;
 
 namespace SquareTest.WhenConstructing
 {
@@ -32,7 +32,7 @@ namespace SquareTest.WhenConstructing
 
 namespace SquareTest
 {
-    using Refactoring.Entities;
+    using Domain.Entities;
 
     [TestClass]
     public class WhenCalculatingSurfaceArea

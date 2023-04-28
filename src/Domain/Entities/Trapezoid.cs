@@ -1,4 +1,4 @@
-namespace Refactoring.Entities
+namespace Domain.Entities
 {
     public class Trapezoid : IGeometricShape
     {

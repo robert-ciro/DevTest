@@ -1,6 +1,6 @@
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Refactoring.Entities;
+using Domain.Entities;
 
 namespace CircleTest.WhenConstructing
 {
@@ -32,7 +32,7 @@ namespace CircleTest.WhenConstructing
 
 namespace CircleTest
 {
-    using Refactoring.Entities;
+    using Domain.Entities;
 
     [TestClass]
     public class WhenCalculatingSurfaceArea

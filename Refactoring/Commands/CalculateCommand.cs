@@ -1,5 +1,7 @@
 namespace Refactoring.Commands
 {
+    using Domain;
+
     public class CalculateCommand : INonParameterizedCommand
     {
         private readonly ILogger logger;

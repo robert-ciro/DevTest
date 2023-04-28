@@ -1,6 +1,7 @@
 namespace Refactoring.Commands
 {
-    
+    using Domain;
+
     public class ResetCommand : INonParameterizedCommand
     {   
         private readonly ILogger logger;

@@ -1,7 +1,8 @@
 namespace Refactoring.Commands
 {
     using System.Text.RegularExpressions;
-    using Refactoring.Entities;
+    using Domain;
+    using Domain.Entities;
 
     public class CreateTrapezoidCommand : IParameterizedCommand
     {

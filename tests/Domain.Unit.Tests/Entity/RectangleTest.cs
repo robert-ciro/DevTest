@@ -1,23 +1,23 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
-namespace TriangleTest
+namespace RectangleTest
 {
-    using Refactoring.Entities;
-    using Refactoring.ValueTypes;
+    using Domain.Entities;
+    using Domain.ValueTypes;
 
     [TestClass]
     public class WhenCalculatingSurfaceArea
     {
         [TestMethod]
-        [DataRow(13d, 34d, 221d)]
-        [DataRow(43d, 54d, 1161d)]
+        [DataRow(23d, 67d, 1541d)]
+        [DataRow(55d, 33d, 1815d)]
         public void ShouldReturnValidSurfaceArea(double height, double width, double expectedSurfaceArea)
         {
             // Arrange
             var dimension = new Dimension(height, width);
-            var triangle = new Triangle(dimension);
+            var rectangle = new Rectangle(dimension);
             // Act
-            var surfaceArea = triangle.CalculateSurfaceArea();
+            var surfaceArea = rectangle.CalculateSurfaceArea();
             // Assert
             Assert.AreEqual(expectedSurfaceArea, actual: surfaceArea);
         }

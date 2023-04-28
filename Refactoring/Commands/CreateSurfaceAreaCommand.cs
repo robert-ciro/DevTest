@@ -1,6 +1,7 @@
 namespace Refactoring.Commands
 {
     using System.Text.RegularExpressions;
+    using Domain;
 
     public class CreateSurfaceAreaCommand : IParameterizedCommand
     {

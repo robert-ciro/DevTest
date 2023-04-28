@@ -1,6 +1,6 @@
 using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Refactoring.Entities;
+using Domain.Entities;
 
 namespace TrapezoidTest.WhenConstructing
 {
@@ -34,7 +34,7 @@ namespace TrapezoidTest.WhenConstructing
 
 namespace TrapezoidTest
 {
-    using Refactoring.Entities;
+    using Domain.Entities;
 
     [TestClass]
     public class WhenCalculatingSurfaceArea

@@ -1,4 +1,4 @@
-namespace Refactoring.ValueTypes
+namespace Domain.ValueTypes
 {
     using System;
 

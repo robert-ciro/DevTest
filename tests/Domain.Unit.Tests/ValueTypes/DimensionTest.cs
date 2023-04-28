@@ -2,7 +2,7 @@ namespace DimensionTest.WhenConstructing
 {
     using System;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Refactoring.ValueTypes;
+    using Domain.ValueTypes;
 
     [TestClass]
     public class GivenValidInput

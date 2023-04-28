@@ -1,9 +1,9 @@
 ﻿namespace SurfaceAreaCalculatorTest
 {
+    using Domain;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using Refactoring;
-    using Refactoring.Entities;
-    using Refactoring.ValueTypes;
+    using Domain.Entities;
+    using Domain.ValueTypes;
 
     [TestClass]
     public class WhenCalculatingSurfaceAreas
@@ -36,7 +36,7 @@
             var trapezoid = new Trapezoid(TrapezoidTop, TrapezoidBottom, TrapezoidHigh);
 
             // Act
-            var surfaceAreaCalculator = new SurfaceAreaCalculator(new YummyLogger());
+            var surfaceAreaCalculator = new SurfaceAreaCalculator();
             surfaceAreaCalculator.Add(triangle);
             surfaceAreaCalculator.Add(circle);
             surfaceAreaCalculator.Add(square);
@@ -50,13 +50,6 @@
             Assert.AreEqual(expected: SquareSurfaceArea, surfaceAreas[2]);
             Assert.AreEqual(expected: RectangleSurfaceArea, surfaceAreas[3]);
             Assert.AreEqual(expected: TrapezoidSurfaceArea, surfaceAreas[4]);
-        }
-    }
-    
-    internal class YummyLogger : ILogger
-    {
-        public void Log(string pLog)
-        {
         }
     }
 }

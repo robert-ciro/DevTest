@@ -1,8 +1,9 @@
 namespace Refactoring.Commands
 {
     using System.Text.RegularExpressions;
-    using Refactoring.Entities;
-    using Refactoring.ValueTypes;
+    using Domain;
+    using Domain.Entities;
+    using Domain.ValueTypes;
 
     public class CreateRectangleCommand : IParameterizedCommand
     {

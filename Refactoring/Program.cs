@@ -2,7 +2,7 @@
 
 namespace Refactoring
 {
-    using System.Linq;
+    using Domain;
     using Refactoring.Commands;
 
     class Program
@@ -10,7 +10,7 @@ namespace Refactoring
         static void Main(string[] args)
         {
             var logger = new Logger();
-            var surfaceAreaCalculator = new SurfaceAreaCalculator(logger);
+            var surfaceAreaCalculator = new SurfaceAreaCalculator();
             var consoleUserInterface = new ConsoleUserInterface();
             var commandFactory = new SurfaceAreaCommandFactory(logger, surfaceAreaCalculator);
             

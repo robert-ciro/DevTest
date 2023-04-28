@@ -1,6 +1,6 @@
-namespace Refactoring.Entities
+namespace Domain.Entities
 {
-    using Refactoring.ValueTypes;
+    using Domain.ValueTypes;
 
     public class Triangle : IGeometricShape
     {

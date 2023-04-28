@@ -1,6 +1,7 @@
 namespace Refactoring.Commands
 {
     using System.Linq;
+    using Domain;
 
     public class PrintCommand : INonParameterizedCommand
     {
