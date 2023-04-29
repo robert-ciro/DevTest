@@ -1,19 +1,31 @@
 ﻿using System;
-
+using Microsoft.Extensions.DependencyInjection;
+    
 namespace Refactoring
 {
-    using Domain;
     using Application;
-    using Application.Commands;
 
     class Program
     {
         static void Main(string[] args)
         {
-            var commandFactory = new SurfaceAreaCommandFactory(new SurfaceAreaCalculator());
-            var service = new GeometricShapeService(new Logger(), new ConsoleUserInterface(), commandFactory);
+            IServiceCollection services = new ServiceCollection();
+
+            ConfigureServices(services);
+
+            IServiceProvider serviceProvider = services.BuildServiceProvider();
             
+            var service = serviceProvider.GetService<GeometricShapeService>()!;
+
             service.Start();
+        }
+
+        private static void ConfigureServices(IServiceCollection services)
+        {
+            services.AddTransient<ILogger, Logger>()
+                    .AddTransient<IUserInterface, ConsoleUserInterface>()
+                    .AddTransient<GeometricShapeService>()
+                    .RegisterApplicationDependencies();
         }
     }
 }
