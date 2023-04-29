@@ -9,13 +9,13 @@ This program consist of a console application that calculates the surface area o
 
 Install the following environments:
 
-- .NET Framework 4.8
+- .NET 7.0 or higher
 
 ## Built With 📦
 
 - [Visual Studio 2022](https://visualstudio.microsoft.com/es/vs/) - IDE
 - [C#](https://docs.microsoft.com/en-us/dotnet/csharp/) - Programming language
-- [Console Application](https://learn.microsoft.com/en-us/dotnet/api/system.console?view=netframework-4.8) - Application type
+- [Console Application](https://learn.microsoft.com/en-us/dotnet/api/system.console?view=net-7.0) - Application type
 
 ## How to run 🏃
 
