@@ -4,9 +4,6 @@ namespace Application.Commands
 
     public class ExitCommand : INonParameterizedCommand
     {
-        public CommandResponse Execute()
-        {
-            return new CommandResponse(ShouldQuit: true, ExecutedSuccessfully: true);
-        }
+        public CommandResponse Execute() => new (ShouldQuit: true, ExecutedSuccessfully: true);
     }
 }

@@ -4,10 +4,14 @@ namespace Application.Commands
     using Application.Dtos;
     using Domain;
 
-    public class CreateSurfaceAreaCommand : IParameterizedCommand
+    public partial class CreateSurfaceAreaCommand : IParameterizedCommand
     {
-        private const string GEOMETRY_SHAPES_WITH_PARAMETERS_PATTERN = @"^(square|circle|triangle|rectangle|trapezoid) ?(.*)$";
-
+        private const string SQUARE = "square";
+        private const string CIRCLE = "circle";
+        private const string TRIANGLE = "triangle";
+        private const string RECTANGLE = "rectangle";
+        private const string TRAPEZOID = "trapezoid";
+        
         private readonly SurfaceAreaCalculator surfaceAreaCalculator;
 
         public CreateSurfaceAreaCommand(SurfaceAreaCalculator surfaceAreaCalculator)
@@ -17,7 +21,7 @@ namespace Application.Commands
 
         public CommandResponse Execute(string parameters)
         {
-            var match = Regex.Match(parameters, GEOMETRY_SHAPES_WITH_PARAMETERS_PATTERN, RegexOptions.IgnoreCase);
+            var match = GeometryShapesWithParametersRegex().Match(parameters);
 
             if (match.Success is false)
                 return new();
@@ -25,21 +29,18 @@ namespace Application.Commands
             var geometryShape = match.Groups[1].Value;
             var nextParameters = match.Groups[2].Value;
 
-            switch (geometryShape)
-            {
-                case "square":
-                    return new CreateSquareCommand(surfaceAreaCalculator).Execute(nextParameters);
-                case "circle":
-                   return new CreateCircleCommand(surfaceAreaCalculator).Execute(nextParameters);
-                case "triangle":
-                    return new CreateTriangleCommand(surfaceAreaCalculator).Execute(nextParameters);
-                case "rectangle":
-                    return new CreateRectangleCommand(surfaceAreaCalculator).Execute(nextParameters);
-                case "trapezoid":
-                    return new CreateTrapezoidCommand(surfaceAreaCalculator).Execute(nextParameters);
-                default:
-                    return new(ExecutedSuccessfully: false);
-            }
+            return geometryShape switch
+                   {
+                       SQUARE => new CreateSquareCommand(surfaceAreaCalculator).Execute(nextParameters),
+                       CIRCLE => new CreateCircleCommand(surfaceAreaCalculator).Execute(nextParameters),
+                       TRIANGLE => new CreateTriangleCommand(surfaceAreaCalculator).Execute(nextParameters),
+                       RECTANGLE => new CreateRectangleCommand(surfaceAreaCalculator).Execute(nextParameters),
+                       TRAPEZOID => new CreateTrapezoidCommand(surfaceAreaCalculator).Execute(nextParameters),
+                       _ => new(ExecutedSuccessfully: false)
+                   };
         }
+
+        [GeneratedRegex($"^({SQUARE}|{CIRCLE}|{TRIANGLE}|{RECTANGLE}|{TRAPEZOID}) ?(.*)$", RegexOptions.IgnoreCase)]
+        private static partial Regex GeometryShapesWithParametersRegex();
     }
 }

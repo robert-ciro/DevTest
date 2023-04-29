@@ -5,10 +5,9 @@ namespace Application.Commands
     using Domain;
     using Domain.Entities;
 
-    public class CreateTrapezoidCommand : IParameterizedCommand
+    public partial class CreateTrapezoidCommand : IParameterizedCommand
     {
         private readonly SurfaceAreaCalculator surfaceAreaCalculator;
-        private const string PARAMETERS_PATTERN = @"^(\d+) (\d+) (\d+)$";
         
         public CreateTrapezoidCommand(SurfaceAreaCalculator surfaceAreaCalculator)
         {
@@ -17,10 +16,10 @@ namespace Application.Commands
 
         public CommandResponse Execute(string parameters)
         {
-            var match = Regex.Match(parameters, PARAMETERS_PATTERN, RegexOptions.IgnoreCase);
+            var match = ParametersRegex().Match(parameters);
             
             if (match.Success is false)
-                return new ();
+                return new();
  
             var trapezoid = new Trapezoid(top: double.Parse(match.Groups[1].Value),
                                           bottom: double.Parse(match.Groups[2].Value),
@@ -28,10 +27,13 @@ namespace Application.Commands
 
             surfaceAreaCalculator.Add(trapezoid);
             
-            return new (ExecutedSuccessfully: true)
+            return new(ExecutedSuccessfully: true)
             {
                 Message = $"{nameof(Trapezoid)} created!"
             };
         }
+
+        [GeneratedRegex("^(\\d+) (\\d+) (\\d+)$", RegexOptions.IgnoreCase, "en-NL")]
+        private static partial Regex ParametersRegex();
     }
 }

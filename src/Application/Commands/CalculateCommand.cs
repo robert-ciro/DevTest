@@ -15,7 +15,8 @@ namespace Application.Commands
         public CommandResponse Execute()
         {
             surfaceAreaCalculator.CalculateSurfaceAreas();
-            return new (ExecutedSuccessfully: true)
+
+            return new(ExecutedSuccessfully: true)
             {
                 Message = "Surface areas calculated!"
             };

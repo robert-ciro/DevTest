@@ -29,7 +29,8 @@ namespace Application.Commands
                                                    tuple =>
                                                        $"[{tuple.index}] {geometricShape[tuple.index].Name} surface area is {tuple.value}")
                                                .ToArray();
-            return new (ExecutedSuccessfully: true)
+
+            return new(ExecutedSuccessfully: true)
             {
                 Message = string.Join(Environment.NewLine, messageBySurfaceArea)
             };

@@ -5,11 +5,10 @@ namespace Application.Commands
     using Domain;
     using Domain.Entities;
 
-    public class CreateCircleCommand : IParameterizedCommand
+    public partial class CreateCircleCommand : IParameterizedCommand
     {
         private readonly SurfaceAreaCalculator surfaceAreaCalculator;
-        private const string PARAMETERS_PATTERN =@"^\d+$";
-        
+
         public CreateCircleCommand(SurfaceAreaCalculator surfaceAreaCalculator)
         {
             this.surfaceAreaCalculator = surfaceAreaCalculator;
@@ -17,18 +16,21 @@ namespace Application.Commands
 
         public CommandResponse Execute(string parameters)
         {
-            var match = Regex.Match(parameters, PARAMETERS_PATTERN, RegexOptions.IgnoreCase);
-            
+            var match = ParameterRegex().Match(parameters);
+
             if (match.Success is false)
-                return new ();
-            
+                return new();
+
             var circle = new Circle(radius: double.Parse(match.Groups[0].Value));
             surfaceAreaCalculator.Add(circle);
 
-            return new (ExecutedSuccessfully: true)
+            return new(ExecutedSuccessfully: true)
             {
                 Message = $"{nameof(Circle)} created!"
             };
         }
+
+        [GeneratedRegex("^\\d+$", RegexOptions.IgnoreCase)]
+        private static partial Regex ParameterRegex();
     }
 }

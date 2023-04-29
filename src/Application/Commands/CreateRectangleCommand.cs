@@ -6,11 +6,10 @@ namespace Application.Commands
     using Domain.Entities;
     using Domain.ValueTypes;
 
-    public class CreateRectangleCommand : IParameterizedCommand
+    public partial class CreateRectangleCommand : IParameterizedCommand
     {
         private readonly SurfaceAreaCalculator surfaceAreaCalculator;
-        private const string PARAMETERS_PATTERN =@"^(\d+) (\d+)$";
-        
+
         public CreateRectangleCommand(SurfaceAreaCalculator surfaceAreaCalculator)
         {
             this.surfaceAreaCalculator = surfaceAreaCalculator;
@@ -18,20 +17,23 @@ namespace Application.Commands
 
         public CommandResponse Execute(string parameters)
         {
-            var match = Regex.Match(parameters, PARAMETERS_PATTERN, RegexOptions.IgnoreCase);
+            var match = ParametersRegex().Match(parameters);
             
             if (match.Success is false)
-                return new ();
+                return new();
  
             var dimension = new Dimension(height: double.Parse(match.Groups[1].Value), width: double.Parse(match.Groups[2].Value));
             var rectangle = new Rectangle(dimension);
 
             surfaceAreaCalculator.Add(rectangle);
             
-            return new (ExecutedSuccessfully: true)
+            return new(ExecutedSuccessfully: true)
             {
                 Message = $"{nameof(Rectangle)} created!"
             };
         }
+
+        [GeneratedRegex("^(\\d+) (\\d+)$", RegexOptions.IgnoreCase)]
+        private static partial Regex ParametersRegex();
     }
 }

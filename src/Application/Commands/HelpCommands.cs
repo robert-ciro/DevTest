@@ -4,9 +4,8 @@ namespace Application.Commands
 
     public class HelpCommand : INonParameterizedCommand
     {
-        public CommandResponse Execute()
-        {
-            return new (ExecutedSuccessfully: true)
+        public CommandResponse Execute() => 
+            new(ExecutedSuccessfully: true)
             {
                 Message = @"
 commands:
@@ -21,6 +20,6 @@ commands:
 - exit (exit the loop)
 "
             };
-        }
+
     }
 }
