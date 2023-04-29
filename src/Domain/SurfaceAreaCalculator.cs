@@ -2,47 +2,41 @@ namespace Domain
 {
     using System.Collections.Generic;
     using Domain.Entities;
+    using Domain.Ports;
 
     public class SurfaceAreaCalculator
     {
-        private List<IGeometricShape> geometricShapes;
         private List<double> surfaceAreas;
 
-        public IReadOnlyList<IGeometricShape> GeometricShapes => this.geometricShapes.AsReadOnly();
+        private readonly IGeometricShapeRepository repository;
+        public IReadOnlyList<IGeometricShape> GeometricShapes => repository.FindAll().ToList().AsReadOnly();
         public IReadOnlyList<double> SurfaceAreas => this.surfaceAreas.AsReadOnly();
 
-        public SurfaceAreaCalculator()
+        public SurfaceAreaCalculator(IGeometricShapeRepository repository)
         {
-            this.geometricShapes = new List<IGeometricShape>();
             this.surfaceAreas = new List<double>();
+            this.repository = repository;
         }
 
         public void Add(IGeometricShape geometryShape)
         {
-            this.geometricShapes.Add(geometryShape);
+            repository.Save(geometryShape);
         }
 
         public void CalculateSurfaceAreas()
         {
-            try
-            {
-                this.surfaceAreas = new List<double>();
+            this.surfaceAreas = new List<double>();
 
-                foreach (var geometricShape in this.geometricShapes)
-                {
-                    this.surfaceAreas.Add(geometricShape.CalculateSurfaceArea());
-                }
-            }
-            catch
+            foreach (var geometricShape in this.GeometricShapes)
             {
-                this.geometricShapes = new List<IGeometricShape>();
+                this.surfaceAreas.Add(geometricShape.CalculateSurfaceArea());
             }
         }
 
         public void Reset()
         {
-            this.surfaceAreas = new List<double>();
-            this.geometricShapes = new List<IGeometricShape>();
+            surfaceAreas = new List<double>();
+            repository.RemoveAll();
         }
     }
 }

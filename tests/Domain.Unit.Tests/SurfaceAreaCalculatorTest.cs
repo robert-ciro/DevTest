@@ -36,7 +36,7 @@
             var trapezoid = new Trapezoid(TrapezoidTop, TrapezoidBottom, TrapezoidHigh);
 
             // Act
-            var surfaceAreaCalculator = new SurfaceAreaCalculator();
+            var surfaceAreaCalculator = new SurfaceAreaCalculator(null);
             surfaceAreaCalculator.Add(triangle);
             surfaceAreaCalculator.Add(circle);
             surfaceAreaCalculator.Add(square);

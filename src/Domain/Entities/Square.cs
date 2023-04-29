@@ -4,7 +4,10 @@ namespace Domain.Entities
 
     public sealed record Square : IGeometricShape
     {
+        public Guid Id { get; set; } = Guid.NewGuid();
         public string Name => nameof(Square);
+
+        public double SurfaceArea { get; private set; }
         public double Side { get; }
 
         public Square(double side)
@@ -17,6 +20,7 @@ namespace Domain.Entities
 
         public double CalculateSurfaceArea()
         {
+            SurfaceArea = this.Side * this.Side;
             return this.Side * this.Side;
         }
     }

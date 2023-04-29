@@ -4,7 +4,10 @@ namespace Domain.Entities
 
     public sealed record Circle : IGeometricShape
     {
+        public Guid Id { get; set; } = Guid.NewGuid();
         public string Name => nameof(Circle);
+
+        public double SurfaceArea { get;  private set; }
         public double Radius { get; }
 
         public Circle(double radius)
@@ -15,6 +18,10 @@ namespace Domain.Entities
             this.Radius = radius;
         }
  
-        public double CalculateSurfaceArea() => Math.Round(Math.PI * (Radius * Radius), 2);
+        public double CalculateSurfaceArea()
+        {
+            SurfaceArea = Math.Round(Math.PI * (Radius * Radius), 2);
+            return Math.Round(Math.PI * (Radius * Radius), 2);
+        }
     }
 }
