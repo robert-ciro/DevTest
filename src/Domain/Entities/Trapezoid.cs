@@ -2,7 +2,7 @@ namespace Domain.Entities
 {
     public class Trapezoid : IGeometricShape
     {
-        public string Name { get; } = nameof(Trapezoid);
+        public string Name => nameof(Trapezoid);
         public double Top { get; }
         public double Bottom { get; }
         public double Height { get; }

@@ -2,18 +2,16 @@ namespace Domain.Entities
 {
     using System;
 
-    public class Square : IGeometricShape
+    public sealed record Square : IGeometricShape
     {
-        public string Name { get; } = nameof(Square);
+        public string Name => nameof(Square);
         public double Side { get; }
 
         public Square(double side)
         {
             if(side <= 0)
-            {
                 throw new ArgumentException("Side must be greater than 0.");
-            }
-            
+
             this.Side = side;
         }
 

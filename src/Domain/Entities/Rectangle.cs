@@ -2,19 +2,10 @@ namespace Domain.Entities
 {
     using Domain.ValueTypes;
 
-    public class Rectangle : IGeometricShape
+    public sealed record Rectangle(Dimension Dimension) : IGeometricShape
     {
-        public string Name { get; } = nameof(Rectangle);
-        public Dimension Dimension { get; } 
-        
-        public Rectangle(Dimension dimension)
-        {
-            Dimension = dimension;
-        }
+        public string Name => nameof(Rectangle);
 
-        public double CalculateSurfaceArea()
-        {
-            return Dimension.Height * Dimension.Width;
-        }
+        public double CalculateSurfaceArea() => Dimension.Height * Dimension.Width;
     }
 }

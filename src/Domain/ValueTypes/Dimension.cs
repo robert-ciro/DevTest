@@ -2,7 +2,7 @@ namespace Domain.ValueTypes
 {
     using System;
 
-    public sealed class Dimension
+    public readonly record struct Dimension
     {
         public double Height { get; }
 
