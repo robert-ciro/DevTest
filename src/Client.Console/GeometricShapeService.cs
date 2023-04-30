@@ -45,7 +45,7 @@ namespace Refactoring
 
                 result = ExecuteCommand(command, parameters);
 
-                if (result.ExecutedSuccessfully is false)
+                if(result.ExecutedSuccessfully is false && string.IsNullOrEmpty(result.Message))
                     result = ExecuteCommand(commandFactory.Create("show").command);
 
                 logger.Log(result.Message);

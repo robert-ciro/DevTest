@@ -11,14 +11,16 @@ namespace Application.Commands
         {
             this.surfaceAreaCalculator = surfaceAreaCalculator;
         }
-        
+
         public CommandResponse Execute()
         {
             surfaceAreaCalculator.CalculateSurfaceAreas();
 
             return new(ExecutedSuccessfully: true)
             {
-                Message = "Surface areas calculated!"
+                Message = surfaceAreaCalculator.SurfaceAreas.Any()
+                    ? "Surface areas calculated!"
+                    : "No geometric shapes to calculate surface areas for!"
             };
         }
     }
