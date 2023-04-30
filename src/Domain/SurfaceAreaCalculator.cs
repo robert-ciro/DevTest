@@ -4,6 +4,12 @@ namespace Domain
     using Domain.Entities;
     using Domain.Ports;
 
+    public record CalculatedSurfaceArea
+    {
+       public double SurfaceArea { get; }
+       public string ShapeName { get; }
+    };
+    
     public class SurfaceAreaCalculator
     {
         private List<double> surfaceAreas;

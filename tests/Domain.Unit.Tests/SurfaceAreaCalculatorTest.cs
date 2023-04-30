@@ -3,7 +3,9 @@
     using Domain;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
     using Domain.Entities;
+    using Domain.Ports;
     using Domain.ValueTypes;
+    using Moq;
 
     [TestClass]
     public class WhenCalculatingSurfaceAreas
@@ -26,22 +28,28 @@
         [TestMethod]
         public void ShouldReturnValidSurfaceAreas()
         {
+            var geometricShapes = new List<IGeometricShape>
+            {
+                new Triangle(new Dimension(TriangleHeight, TriangleWidth)),
+                new Circle(CircleRadius),
+                new Square(SquareSide),
+                new Rectangle(new Dimension(RectangleHeight, RectangleWidth)),
+                new Trapezoid(TrapezoidTop, TrapezoidBottom, TrapezoidHigh)
+            };
             // Arrange
-            var triangleDimension = new Dimension(TriangleHeight, TriangleWidth);
-            var triangle = new Triangle(triangleDimension);
-            var circle = new Circle(CircleRadius);
-            var square = new Square(SquareSide);
-            var dimension = new Dimension(RectangleHeight, RectangleWidth);
-            var rectangle = new Rectangle(dimension);
-            var trapezoid = new Trapezoid(TrapezoidTop, TrapezoidBottom, TrapezoidHigh);
-
+            var repositoryMock = new Mock<IGeometricShapeRepository>();
+            repositoryMock.Setup(exp => exp.Save(It.IsAny<IGeometricShape>()))
+                          .Returns(true);
+            
+            repositoryMock.Setup(exp => exp.FindAll())
+                          .Returns(geometricShapes);
             // Act
-            var surfaceAreaCalculator = new SurfaceAreaCalculator(null);
-            surfaceAreaCalculator.Add(triangle);
-            surfaceAreaCalculator.Add(circle);
-            surfaceAreaCalculator.Add(square);
-            surfaceAreaCalculator.Add(rectangle);
-            surfaceAreaCalculator.Add(trapezoid);
+            var surfaceAreaCalculator = new SurfaceAreaCalculator(repositoryMock.Object);
+            surfaceAreaCalculator.Add(geometricShapes.First());
+            surfaceAreaCalculator.Add(geometricShapes[1]);
+            surfaceAreaCalculator.Add(geometricShapes[2]);
+            surfaceAreaCalculator.Add(geometricShapes[3]);
+            surfaceAreaCalculator.Add(geometricShapes.Last());
             surfaceAreaCalculator.CalculateSurfaceAreas();
             var surfaceAreas = surfaceAreaCalculator.SurfaceAreas;
             // Assert
