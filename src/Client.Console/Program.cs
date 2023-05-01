@@ -1,31 +1,21 @@
-﻿using System;
-using Microsoft.Extensions.DependencyInjection;
-    
-namespace Refactoring
-{
-    using Application;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Application;
+using Client.Console;
 
-    class Program
-    {
-        static void Main(string[] args)
-        {
-            IServiceCollection services = new ServiceCollection();
+IServiceCollection services = new ServiceCollection();
 
-            ConfigureServices(services);
+ConfigureServices(services);
 
-            IServiceProvider serviceProvider = services.BuildServiceProvider();
+IServiceProvider serviceProvider = services.BuildServiceProvider();
             
-            var service = serviceProvider.GetService<GeometricShapeService>()!;
+var service = serviceProvider.GetService<GeometricShapeService>()!;
 
-            service.Start();
-        }
+service.Start();
 
-        private static void ConfigureServices(IServiceCollection services)
-        {
-            services.AddTransient<ILogger, Logger>()
-                    .AddTransient<IUserInterface, ConsoleUserInterface>()
-                    .AddTransient<GeometricShapeService>()
-                    .RegisterApplicationDependencies();
-        }
-    }
+static void ConfigureServices(IServiceCollection services)
+{
+    services.AddTransient<ILogger, Logger>()
+            .AddTransient<IUserInterface, ConsoleUserInterface>()
+            .AddTransient<GeometricShapeService>()
+            .RegisterApplicationDependencies();
 }

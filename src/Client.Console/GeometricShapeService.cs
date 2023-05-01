@@ -1,4 +1,4 @@
-namespace Refactoring
+namespace Client.Console
 {
     using System;
     using Application;
@@ -69,15 +69,12 @@ namespace Refactoring
 
         private static CommandResponse ExecuteCommand(ICommand command, string parameters = null)
         {
-            switch (command)
-            {
-                case IParameterizedCommand parameterizedCommand:
-                    return parameterizedCommand.Execute(parameters);
-                case INonParameterizedCommand nonParameterizedCommand:
-                    return nonParameterizedCommand.Execute();
-                default:
-                    throw new NotSupportedException("Command not supported");
-            }
+            return command switch
+                   {
+                       IParameterizedCommand parameterizedCommand => parameterizedCommand.Execute(parameters),
+                       INonParameterizedCommand nonParameterizedCommand => nonParameterizedCommand.Execute(),
+                       _ => throw new NotSupportedException("Command not supported")
+                   };
         }
     }
 }

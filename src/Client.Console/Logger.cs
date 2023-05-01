@@ -1,4 +1,4 @@
-namespace Refactoring
+namespace Client.Console
 {
     using System;
     using Application;
